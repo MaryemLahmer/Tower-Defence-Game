@@ -8,6 +8,7 @@ public class GridManager : MonoBehaviour
     public int gridHeight = 8;
     public int minPathLength = 30;
     public GridCellObject[] gridCells;
+    public GridCellObject[] sceneryCells; 
     private PathGenerator _pathGenerator;
 
     void Start()
@@ -22,6 +23,7 @@ public class GridManager : MonoBehaviour
         }
         
         StartCoroutine(LayPathCells(pathCells));
+
     }
 
     private IEnumerator LayPathCells(List<Vector2Int> pathCells)
@@ -32,11 +34,31 @@ public class GridManager : MonoBehaviour
             GameObject pathTile = gridCells[neighbourValue].cellPrefab;
             GameObject pathtileCell = Instantiate(pathTile, new Vector3(pathCell.x, 0f, pathCell.y), Quaternion.identity);
             pathtileCell.transform.Rotate(0f, gridCells[neighbourValue].yRotation, 0f, Space.Self);
-            yield return new WaitForSeconds(0.4f);
+            yield return new WaitForSeconds(0.25f);
+        }
+
+        yield return null;
+        StartCoroutine(LaySceneryCells());
+
+    }
+
+    private IEnumerator LaySceneryCells()
+    {
+        for (int x = 0; x < gridWidth; x++)
+        {
+            for (int y = 0; y < gridHeight; y++)
+            {
+                if (_pathGenerator.CellIsEmpty(x, y))
+                {
+                    int randomIndex = Random.Range(0, sceneryCells.Length);
+                    Instantiate(sceneryCells[randomIndex].cellPrefab, new Vector3(x, 0f, y), Quaternion.identity);
+                    yield return new WaitForSeconds(0.1f);
+
+                }
+            }
         }
 
         yield return null;
     }
-
    
 }

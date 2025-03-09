@@ -161,7 +161,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3c2915bdcaddfab479f4684c173996b1, type: 2}
   - {fileID: 11400000, guid: 37c441e3365ceb1458c21922dc77c00a, type: 2}
   - {fileID: 11400000, guid: d4998dae12f7b374a8ed35b3200b8056, type: 2}
-  - {fileID: 11400000, guid: 9d3f435ca0200e44ebda8b31e95bc1f7, type: 2}
+  - {fileID: 11400000, guid: 5265e2410a18d7343a98bef338e52c38, type: 2}
   - {fileID: 11400000, guid: 9d3f435ca0200e44ebda8b31e95bc1f7, type: 2}
   - {fileID: 11400000, guid: 9d3f435ca0200e44ebda8b31e95bc1f7, type: 2}
   - {fileID: 11400000, guid: c94e466a37ec8154c97ceb7c2954c915, type: 2}
@@ -171,6 +171,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9d3f435ca0200e44ebda8b31e95bc1f7, type: 2}
   - {fileID: 11400000, guid: 9d3f435ca0200e44ebda8b31e95bc1f7, type: 2}
   - {fileID: 11400000, guid: 9d3f435ca0200e44ebda8b31e95bc1f7, type: 2}
+  sceneryCells:
+  - {fileID: 11400000, guid: 9d3f435ca0200e44ebda8b31e95bc1f7, type: 2}
+  - {fileID: 11400000, guid: 327353874617f124180abd835a138d47, type: 2}
+  - {fileID: 11400000, guid: ddcf1b3504c47d245bc394a366f9da70, type: 2}
+  - {fileID: 11400000, guid: f60b30fb155f8ab47bd22a5c492ae5fc, type: 2}
+  - {fileID: 11400000, guid: 349eaa894ee32e444af3a232b0f1a028, type: 2}
+  - {fileID: 11400000, guid: 07f151ef9d4e56d4ebf94f158d31c963, type: 2}
+  - {fileID: 11400000, guid: 277f1a0c862fdfe459ac51ea458f9547, type: 2}
 --- !u!4 &693872038
 Transform:
   m_ObjectHideFlags: 0
