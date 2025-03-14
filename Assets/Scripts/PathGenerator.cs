@@ -46,7 +46,6 @@ public class PathGenerator
         return pathCells;
     }
 
-   
 
     public bool CellIsEmpty(int x, int y)
     {
@@ -74,26 +73,26 @@ public class PathGenerator
         for (int i = 0; i < pathCells.Count; i++)
         {
             Vector2Int pathcell = pathCells[i];
-            
+
             if (CellIsEmpty(pathcell.x, pathcell.y + 3) &&
-                CellIsTaken(pathcell.x + 1, pathcell.y + 3) &&
+                CellIsEmpty(pathcell.x + 1, pathcell.y + 3) &&
                 CellIsEmpty(pathcell.x + 2, pathcell.y + 3) &&
-                CellIsEmpty(pathcell.x - 1, pathcell.y + 2) &&
-                CellIsTaken(pathcell.x, pathcell.y + 2) &&
+                // CellIsEmpty(pathcell.x - 1, pathcell.y + 2) &&
+                CellIsEmpty(pathcell.x, pathcell.y + 2) &&
                 CellIsEmpty(pathcell.x + 1, pathcell.y + 2) &&
-                CellIsTaken(pathcell.x + 2, pathcell.y + 2) &&
+                CellIsEmpty(pathcell.x + 2, pathcell.y + 2) &&
                 CellIsEmpty(pathcell.x + 3, pathcell.y + 2) &&
                 CellIsEmpty(pathcell.x - 1, pathcell.y + 1) &&
-                CellIsTaken(pathcell.x, pathcell.y + 1) &&
+                CellIsEmpty(pathcell.x, pathcell.y + 1) &&
                 CellIsEmpty(pathcell.x + 1, pathcell.y + 1) &&
-                CellIsTaken(pathcell.x + 2, pathcell.y + 1) &&
+                CellIsEmpty(pathcell.x + 2, pathcell.y + 1) &&
                 CellIsEmpty(pathcell.x + 3, pathcell.y + 1) &&
-                CellIsTaken(pathcell.x + 1, pathcell.y) &&
-                CellIsTaken(pathcell.x + 2, pathcell.y) &&
-                CellIsTaken(pathcell.x + 3, pathcell.y) &&
-                CellIsTaken(pathcell.x + 1, pathcell.y - 1) &&
-                CellIsTaken(pathcell.x + 2, pathcell.y - 1))
-                
+                CellIsEmpty(pathcell.x + 1, pathcell.y) &&
+                CellIsEmpty(pathcell.x + 2, pathcell.y) &&
+                CellIsEmpty(pathcell.x + 3, pathcell.y) &&
+                CellIsEmpty(pathcell.x + 1, pathcell.y - 1) &&
+                CellIsEmpty(pathcell.x + 2, pathcell.y - 1))
+
             {
                 pathCells.InsertRange(i + 1,
                     new List<Vector2Int>
