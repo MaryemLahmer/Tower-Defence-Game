@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
+    enum pathDifficulty
+    {
+        Easy ,
+        Medium ,
+        Hard 
+    };
     public int gridWidth = 16;
     public int gridHeight = 8;
     public int minPathLength = 30;
@@ -14,11 +20,12 @@ public class GridManager : MonoBehaviour
     void Start()
     {
         _pathGenerator = new PathGenerator(gridWidth, gridHeight);
-        List<Vector2Int> pathCells = _pathGenerator.GeneratePath();
+        List<Vector2Int> pathCells = _pathGenerator.GenerateEasyPath();
+        _pathGenerator.GenerateCrossroads();
         int pathSize = pathCells.Count;
         while (pathSize < minPathLength)
         {
-            pathCells = _pathGenerator.GeneratePath();
+            pathCells = _pathGenerator.GenerateEasyPath();
             pathSize = pathCells.Count;
         }
         
@@ -34,7 +41,7 @@ public class GridManager : MonoBehaviour
             GameObject pathTile = gridCells[neighbourValue].cellPrefab;
             GameObject pathtileCell = Instantiate(pathTile, new Vector3(pathCell.x, 0f, pathCell.y), Quaternion.identity);
             pathtileCell.transform.Rotate(0f, gridCells[neighbourValue].yRotation, 0f, Space.Self);
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(0.02f);
         }
 
         yield return null;
@@ -44,15 +51,15 @@ public class GridManager : MonoBehaviour
 
     private IEnumerator LaySceneryCells()
     {
-        for (int x = 0; x < gridWidth; x++)
+        for (int y = gridHeight -1; y > 0; y--)
         {
-            for (int y = 0; y < gridHeight; y++)
+            for (int x = 0; x < gridWidth; x++)
             {
                 if (_pathGenerator.CellIsEmpty(x, y))
                 {
                     int randomIndex = Random.Range(0, sceneryCells.Length);
                     Instantiate(sceneryCells[randomIndex].cellPrefab, new Vector3(x, 0f, y), Quaternion.identity);
-                    yield return new WaitForSeconds(0.1f);
+                    yield return new WaitForSeconds(0.01f);
 
                 }
             }

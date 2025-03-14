@@ -170,7 +170,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 08ed72ff4992df24fb09d9868b3514bb, type: 2}
   - {fileID: 11400000, guid: 9d3f435ca0200e44ebda8b31e95bc1f7, type: 2}
   - {fileID: 11400000, guid: 9d3f435ca0200e44ebda8b31e95bc1f7, type: 2}
-  - {fileID: 11400000, guid: 9d3f435ca0200e44ebda8b31e95bc1f7, type: 2}
+  - {fileID: 11400000, guid: 3d16e33d5564a3c418fb22d78b78226e, type: 2}
   sceneryCells:
   - {fileID: 11400000, guid: 9d3f435ca0200e44ebda8b31e95bc1f7, type: 2}
   - {fileID: 11400000, guid: 327353874617f124180abd835a138d47, type: 2}

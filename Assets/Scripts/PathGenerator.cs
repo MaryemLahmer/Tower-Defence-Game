@@ -13,7 +13,7 @@ public class PathGenerator
         this.height = height;
     }
 
-    public List<Vector2Int> GeneratePath()
+    public List<Vector2Int> GenerateEasyPath()
     {
         pathCells = new List<Vector2Int>();
         int y = (int)(height / 2);
@@ -46,6 +46,7 @@ public class PathGenerator
         return pathCells;
     }
 
+   
 
     public bool CellIsEmpty(int x, int y)
     {
@@ -57,8 +58,7 @@ public class PathGenerator
         return pathCells.Contains(new Vector2Int(x, y));
     }
 
-    
-    
+
     public int getCellNeighborValue(int x, int y)
     {
         int returnValue = 0;
@@ -68,6 +68,45 @@ public class PathGenerator
         if (CellIsTaken(x + 1, y)) returnValue += 4;
         return returnValue;
     }
-    
-    
+
+    public bool GenerateCrossroads()
+    {
+        for (int i = 0; i < pathCells.Count; i++)
+        {
+            Vector2Int pathcell = pathCells[i];
+            
+            if (CellIsEmpty(pathcell.x, pathcell.y + 3) &&
+                CellIsTaken(pathcell.x + 1, pathcell.y + 3) &&
+                CellIsEmpty(pathcell.x + 2, pathcell.y + 3) &&
+                CellIsEmpty(pathcell.x - 1, pathcell.y + 2) &&
+                CellIsTaken(pathcell.x, pathcell.y + 2) &&
+                CellIsEmpty(pathcell.x + 1, pathcell.y + 2) &&
+                CellIsTaken(pathcell.x + 2, pathcell.y + 2) &&
+                CellIsEmpty(pathcell.x + 3, pathcell.y + 2) &&
+                CellIsEmpty(pathcell.x - 1, pathcell.y + 1) &&
+                CellIsTaken(pathcell.x, pathcell.y + 1) &&
+                CellIsEmpty(pathcell.x + 1, pathcell.y + 1) &&
+                CellIsTaken(pathcell.x + 2, pathcell.y + 1) &&
+                CellIsEmpty(pathcell.x + 3, pathcell.y + 1) &&
+                CellIsTaken(pathcell.x + 1, pathcell.y) &&
+                CellIsTaken(pathcell.x + 2, pathcell.y) &&
+                CellIsTaken(pathcell.x + 3, pathcell.y) &&
+                CellIsTaken(pathcell.x + 1, pathcell.y - 1) &&
+                CellIsTaken(pathcell.x + 2, pathcell.y - 1))
+                
+            {
+                pathCells.InsertRange(i + 1,
+                    new List<Vector2Int>
+                    {
+                        new Vector2Int(pathcell.x + 1, pathcell.y), new Vector2Int(pathcell.x + 2, pathcell.y),
+                        new Vector2Int(pathcell.x + 2, pathcell.y + 1), new Vector2Int(pathcell.x + 2, pathcell.y + 2),
+                        new Vector2Int(pathcell.x + 1, pathcell.y + 2), new Vector2Int(pathcell.x, pathcell.y + 2),
+                        new Vector2Int(pathcell.x, pathcell.y + 1)
+                    });
+                return true;
+            }
+        }
+
+        return true;
+    }
 }
