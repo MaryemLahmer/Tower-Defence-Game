@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
-    public int gridWidth = 16;
-    public int gridHeight = 8;
-    public int minPathLength = 30;
+    public int gridWidth ;
+    public int gridHeight ;
+    public int minPathLength ;
     public GridCellObject[] gridCells;
     public GridCellObject[] sceneryCells;
     private PathGenerator _pathGenerator;
@@ -15,11 +15,15 @@ public class GridManager : MonoBehaviour
     {
         _pathGenerator = new PathGenerator(gridWidth, gridHeight);
         List<Vector2Int> pathCells = _pathGenerator.GenerateEasyPath();
-        _pathGenerator.GenerateCrossroads();
         int pathSize = pathCells.Count;
         while (pathSize < minPathLength)
         {
             pathCells = _pathGenerator.GenerateEasyPath();
+            // for maximum difficulty make the crossroads in a while loop and you'll get more crossroads
+            while (_pathGenerator.GenerateCrossroads()) ;
+            
+            // for easy levels you can just use the following line of code and it will generate an easy path
+           // _pathGenerator.GenerateCrossroads() ;
             pathSize = pathCells.Count;
         }
 
@@ -45,7 +49,6 @@ public class GridManager : MonoBehaviour
         }
 
         yield return null;
-        //StartCoroutine(LaySceneryCells());
     }
 
     private IEnumerator LaySceneryCells()

@@ -153,7 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridWidth: 18
   gridHeight: 10
-  minPathLength: 35
+  minPathLength: 45
   gridCells:
   - {fileID: 11400000, guid: 9d3f435ca0200e44ebda8b31e95bc1f7, type: 2}
   - {fileID: 11400000, guid: 9d3f435ca0200e44ebda8b31e95bc1f7, type: 2}
