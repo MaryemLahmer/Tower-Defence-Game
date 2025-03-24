@@ -3,15 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - cantplace
+  - VirginCell
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Tower
   - Water
   - UI
-  - 
+  - VirginCells
   - 
   - 
   - 
