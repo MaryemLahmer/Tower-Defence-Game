@@ -343,7 +343,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d6ca457df6d17841bb1f183864a6f06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  placementCheckMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  placementCollideMask:
+    serializedVersion: 2
+    m_Bits: 55
   playerCamera: {fileID: 1741037748}
+  virginCellMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &701519485
 GameObject:
   m_ObjectHideFlags: 0
