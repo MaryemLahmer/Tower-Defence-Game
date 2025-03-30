@@ -25,7 +25,7 @@ public class EnemyWaveManager : MonoBehaviour
         {
             Vector3 currentPos = enemyInstance.transform.position;
             Vector3 nextPos =  new Vector3(pathCells[nextPathCellIndex].x, 0.2f, pathCells[nextPathCellIndex].y);
-            enemyInstance.transform.position = Vector3.MoveTowards(currentPos, nextPos, Time.deltaTime * 2);
+            enemyInstance.transform.position = Vector3.MoveTowards(currentPos, nextPos, Time.deltaTime * 4);
             if (Vector3.Distance(currentPos, nextPos) < 0.05f) {
                 nextPathCellIndex++;
                 if (nextPathCellIndex >= pathCells.Count)
@@ -33,9 +33,6 @@ public class EnemyWaveManager : MonoBehaviour
                     Debug.Log("Reached end");
                     enemyRunCompleted = true;
 
-                }else
-                {
-                    nextPathCellIndex++;
                 }
             }
         }

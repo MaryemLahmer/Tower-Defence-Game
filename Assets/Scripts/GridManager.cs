@@ -9,9 +9,6 @@ public class GridManager : MonoBehaviour
     public int minPathLength = 30;
 
     private EnemyWaveManager waveManager;
-    public int gridWidth;
-    public int gridHeight;
-    public int minPathLength;
     public GridCellObject[] gridCells;
     public GridCellObject[] sceneryCells;
     private PathGenerator _pathGenerator;
@@ -35,6 +32,7 @@ public class GridManager : MonoBehaviour
 
             // for easy levels you can just use the following line of code and it will generate an easy path
             // _pathGenerator.GenerateCrossroads() ;
+            
             pathSize = pathCells.Count;
         }
         
@@ -47,7 +45,7 @@ public class GridManager : MonoBehaviour
     {
         yield return LayPathCells(pathCells);
         yield return LaySceneryCells();
-        waveManager.SetPathCells(pathCells);
+        waveManager.SetPathCells(_pathGenerator.GenerateRoute());
     }
 
     private IEnumerator LayPathCells(List<Vector2Int> pathCells)

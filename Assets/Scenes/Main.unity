@@ -1034,6 +1034,7 @@ GameObject:
   - component: {fileID: 693872038}
   - component: {fileID: 693872037}
   - component: {fileID: 693872039}
+  - component: {fileID: 693872040}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1117,6 +1118,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 55
   playerCamera: {fileID: 1741037748}
+--- !u!114 &693872040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693872036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0da55a389cfa0cd4992606816224cac5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyObject: {fileID: 7582364259912719064, guid: 6ede777abce0211438ce386d3232f4cc, type: 3}
 --- !u!1001 &728724110
 PrefabInstance:
   m_ObjectHideFlags: 0

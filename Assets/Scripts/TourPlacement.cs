@@ -30,13 +30,12 @@ public class TourPlacement : MonoBehaviour
                     // Perform a sphere or overlap cast to find all colliders at this point
                     Collider[] hitColliders = Physics.OverlapSphere(hitPosition, 0.1f);
                     // Look for a collider with the VirginCell tag
-                    bool foundValidCell = false;
+
                     foreach (Collider col in hitColliders)
                     {
                         if (col.gameObject.CompareTag("VirginCell"))
                         {
                             CurrentPlacingTower = null;
-                            foundValidCell = true;
                             break;
                         }
                     }
