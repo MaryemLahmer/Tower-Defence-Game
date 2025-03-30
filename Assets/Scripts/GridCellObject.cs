@@ -8,5 +8,6 @@ public class GridCellObject : ScriptableObject
    public GameObject cellPrefab;
    public CellType cellType;
    public int yRotation;
+   [SerializeField] public bool isVirginCell  = false;
    
 }

@@ -74,38 +74,73 @@ public class PathGenerator
         {
             Vector2Int pathcell = pathCells[i];
 
-            if (CellIsEmpty(pathcell.x, pathcell.y + 3) &&
-                CellIsEmpty(pathcell.x + 1, pathcell.y + 3) &&
-                CellIsEmpty(pathcell.x + 2, pathcell.y + 3) &&
-                // CellIsEmpty(pathcell.x - 1, pathcell.y + 2) &&
-                CellIsEmpty(pathcell.x, pathcell.y + 2) &&
-                CellIsEmpty(pathcell.x + 1, pathcell.y + 2) &&
-                CellIsEmpty(pathcell.x + 2, pathcell.y + 2) &&
-                CellIsEmpty(pathcell.x + 3, pathcell.y + 2) &&
-                CellIsEmpty(pathcell.x - 1, pathcell.y + 1) &&
-                CellIsEmpty(pathcell.x, pathcell.y + 1) &&
-                CellIsEmpty(pathcell.x + 1, pathcell.y + 1) &&
-                CellIsEmpty(pathcell.x + 2, pathcell.y + 1) &&
-                CellIsEmpty(pathcell.x + 3, pathcell.y + 1) &&
-                CellIsEmpty(pathcell.x + 1, pathcell.y) &&
-                CellIsEmpty(pathcell.x + 2, pathcell.y) &&
-                CellIsEmpty(pathcell.x + 3, pathcell.y) &&
-                CellIsEmpty(pathcell.x + 1, pathcell.y - 1) &&
-                CellIsEmpty(pathcell.x + 2, pathcell.y - 1))
-
+            if (pathcell.x > 3 && pathcell.x < width - 4 && pathcell.y > 2 && pathcell.y < height - 3)
             {
-                pathCells.InsertRange(i + 1,
-                    new List<Vector2Int>
-                    {
-                        new Vector2Int(pathcell.x + 1, pathcell.y), new Vector2Int(pathcell.x + 2, pathcell.y),
-                        new Vector2Int(pathcell.x + 2, pathcell.y + 1), new Vector2Int(pathcell.x + 2, pathcell.y + 2),
-                        new Vector2Int(pathcell.x + 1, pathcell.y + 2), new Vector2Int(pathcell.x, pathcell.y + 2),
-                        new Vector2Int(pathcell.x, pathcell.y + 1)
-                    });
-                return true;
+                if (CellIsEmpty(pathcell.x, pathcell.y + 3) &&
+                    CellIsEmpty(pathcell.x + 1, pathcell.y + 3) &&
+                    CellIsEmpty(pathcell.x + 2, pathcell.y + 3) &&
+                    CellIsEmpty(pathcell.x - 1, pathcell.y + 2) &&
+                    CellIsEmpty(pathcell.x, pathcell.y + 2) &&
+                    CellIsEmpty(pathcell.x + 1, pathcell.y + 2) &&
+                    CellIsEmpty(pathcell.x + 2, pathcell.y + 2) &&
+                    CellIsEmpty(pathcell.x + 3, pathcell.y + 2) &&
+                    CellIsEmpty(pathcell.x - 1, pathcell.y + 1) &&
+                    CellIsEmpty(pathcell.x, pathcell.y + 1) &&
+                    CellIsEmpty(pathcell.x + 1, pathcell.y + 1) &&
+                    CellIsEmpty(pathcell.x + 2, pathcell.y + 1) &&
+                    CellIsEmpty(pathcell.x + 3, pathcell.y + 1) &&
+                    CellIsEmpty(pathcell.x + 1, pathcell.y) &&
+                    CellIsEmpty(pathcell.x + 2, pathcell.y) &&
+                    CellIsEmpty(pathcell.x + 3, pathcell.y) &&
+                    CellIsEmpty(pathcell.x + 1, pathcell.y - 1) &&
+                    CellIsEmpty(pathcell.x + 2, pathcell.y - 1))
+
+                {
+                    pathCells.InsertRange(i + 1,
+                        new List<Vector2Int>
+                        {
+                            new Vector2Int(pathcell.x + 1, pathcell.y), new Vector2Int(pathcell.x + 2, pathcell.y),
+                            new Vector2Int(pathcell.x + 2, pathcell.y + 1),
+                            new Vector2Int(pathcell.x + 2, pathcell.y + 2),
+                            new Vector2Int(pathcell.x + 1, pathcell.y + 2), new Vector2Int(pathcell.x, pathcell.y + 2),
+                            new Vector2Int(pathcell.x, pathcell.y + 1)
+                        });
+                    return true;
+                }
+
+                if (CellIsEmpty(pathcell.x + 1, pathcell.y + 1) &&
+                    CellIsEmpty(pathcell.x + 2, pathcell.y + 1) &&
+                    CellIsEmpty(pathcell.x + 1, pathcell.y) &&
+                    CellIsEmpty(pathcell.x + 2, pathcell.y) &&
+                    CellIsEmpty(pathcell.x + 3, pathcell.y) &&
+                    CellIsEmpty(pathcell.x - 1, pathcell.y - 1) &&
+                    CellIsEmpty(pathcell.x, pathcell.y - 1) &&
+                    CellIsEmpty(pathcell.x + 1, pathcell.y - 1) &&
+                    CellIsEmpty(pathcell.x + 2, pathcell.y - 1) &&
+                    CellIsEmpty(pathcell.x + 3, pathcell.y - 1) &&
+                    CellIsEmpty(pathcell.x - 1, pathcell.y - 2) &&
+                    CellIsEmpty(pathcell.x, pathcell.y - 2) &&
+                    CellIsEmpty(pathcell.x + 1, pathcell.y - 2) &&
+                    CellIsEmpty(pathcell.x + 2, pathcell.y - 2) &&
+                    CellIsEmpty(pathcell.x, pathcell.y - 3) &&
+                    CellIsEmpty(pathcell.x + 1, pathcell.y - 3) &&
+                    CellIsEmpty(pathcell.x + 2, pathcell.y - 3))
+
+                {
+                    pathCells.InsertRange(i + 1,
+                        new List<Vector2Int>
+                        {
+                            new Vector2Int(pathcell.x + 1, pathcell.y), new Vector2Int(pathcell.x + 2, pathcell.y),
+                            new Vector2Int(pathcell.x + 2, pathcell.y - 1),
+                            new Vector2Int(pathcell.x + 2, pathcell.y - 2),
+                            new Vector2Int(pathcell.x + 1, pathcell.y - 2), new Vector2Int(pathcell.x, pathcell.y - 2),
+                            new Vector2Int(pathcell.x, pathcell.y - 1)
+                        });
+                    return true;
+                }
             }
         }
 
-        return true;
+        return false;
     }
 }

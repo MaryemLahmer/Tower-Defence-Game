@@ -9,6 +9,9 @@ public class GridManager : MonoBehaviour
     public int minPathLength = 30;
 
     private EnemyWaveManager waveManager;
+    public int gridWidth;
+    public int gridHeight;
+    public int minPathLength;
     public GridCellObject[] gridCells;
     public GridCellObject[] sceneryCells;
     private PathGenerator _pathGenerator;
@@ -18,22 +21,27 @@ public class GridManager : MonoBehaviour
         _pathGenerator = new PathGenerator(gridWidth, gridHeight);
         waveManager = GetComponent<EnemyWaveManager>();
         List<Vector2Int> pathCells = _pathGenerator.GenerateEasyPath();
-        _pathGenerator.GenerateCrossroads();
         int pathSize = pathCells.Count;
 
         while (pathSize < minPathLength)
         {
             pathCells = _pathGenerator.GenerateEasyPath();
             
-            while (_pathGenerator.GenerateCrossroads()) ;
+           
             
 
+            // for maximum difficulty make the crossroads in a while loop and you'll get more crossroads
+            while (_pathGenerator.GenerateCrossroads()) ;
+
+            // for easy levels you can just use the following line of code and it will generate an easy path
+            // _pathGenerator.GenerateCrossroads() ;
             pathSize = pathCells.Count;
         }
         
 
         StartCoroutine(LayGrid(pathCells));
     }
+
 
     IEnumerator LayGrid(List<Vector2Int> pathCells)
     {
@@ -55,7 +63,6 @@ public class GridManager : MonoBehaviour
         }
 
         yield return null;
-        //StartCoroutine(LaySceneryCells());
     }
 
     private IEnumerator LaySceneryCells()
@@ -67,12 +74,35 @@ public class GridManager : MonoBehaviour
                 if (_pathGenerator.CellIsEmpty(x, y))
                 {
                     int randomIndex = Random.Range(0, sceneryCells.Length);
-                    Instantiate(sceneryCells[randomIndex].cellPrefab, new Vector3(x, 0f, y), Quaternion.identity);
+                    GameObject sceneryCell = Instantiate(sceneryCells[randomIndex].cellPrefab, new Vector3(x, 0f, y),
+                        Quaternion.identity);
+                    if (sceneryCells[randomIndex].isVirginCell) 
+                    {
+                        sceneryCell.tag = "VirginCell";  
+                        sceneryCell.AddComponent<BoxCollider>();
+
+                    }
+                    if (sceneryCell.GetComponent<Collider>())
+                    {
+                    }
+
                     yield return new WaitForSeconds(0.01f);
                 }
             }
         }
 
         yield return null;
+          CreateMapCollider();
     }
+
+    // Add after you've laid all cells
+    private void CreateMapCollider()
+    {
+        GameObject mapCollider = new GameObject("MapCollider");
+        BoxCollider collider = mapCollider.AddComponent<BoxCollider>();
+        collider.size = new Vector3(gridWidth, 0.1f, gridHeight);
+        collider.center = new Vector3((gridWidth - 1) / 2f, 0.1f, (gridHeight - 1) / 2f);
+    }
+
+   
 }

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 126b23464049eb941913e3ecfeccfeb8, type: 3}
   m_Name: GrassCell
   m_EditorClassIdentifier: 
-  cellPrefab: {fileID: 919132149155446097, guid: 826299ed421eadb47819c304d29f011c, type: 3}
-  cellType: 0
+  cellPrefab: {fileID: 4115359641987690644, guid: 1a29226130f39684cb4aca1dd33d197e, type: 3}
+  cellType: 1
   yRotation: 90
+  isVirginCell: 1
