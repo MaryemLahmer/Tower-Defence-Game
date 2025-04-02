@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
-    public int gridWidth;
-    public int gridHeight;
-    public int minPathLength;
+    public int gridWidth = 16;
+    public int gridHeight = 8;
+    public int minPathLength = 30;
+
+    private EnemyWaveManager waveManager;
     public GridCellObject[] gridCells;
     public GridCellObject[] sceneryCells;
     private PathGenerator _pathGenerator;
@@ -14,18 +16,26 @@ public class GridManager : MonoBehaviour
     void Start()
     {
         _pathGenerator = new PathGenerator(gridWidth, gridHeight);
+        waveManager = GetComponent<EnemyWaveManager>();
         List<Vector2Int> pathCells = _pathGenerator.GenerateEasyPath();
         int pathSize = pathCells.Count;
+
         while (pathSize < minPathLength)
         {
             pathCells = _pathGenerator.GenerateEasyPath();
+            
+           
+            
+
             // for maximum difficulty make the crossroads in a while loop and you'll get more crossroads
             while (_pathGenerator.GenerateCrossroads()) ;
 
             // for easy levels you can just use the following line of code and it will generate an easy path
             // _pathGenerator.GenerateCrossroads() ;
+            
             pathSize = pathCells.Count;
         }
+        
 
         StartCoroutine(LayGrid(pathCells));
     }
@@ -35,6 +45,7 @@ public class GridManager : MonoBehaviour
     {
         yield return LayPathCells(pathCells);
         yield return LaySceneryCells();
+        waveManager.SetPathCells(_pathGenerator.GenerateRoute());
     }
 
     private IEnumerator LayPathCells(List<Vector2Int> pathCells)
