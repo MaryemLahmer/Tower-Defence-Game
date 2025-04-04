@@ -7,7 +7,6 @@ public class GridManager : MonoBehaviour
     public int gridWidth = 16;
     public int gridHeight = 8;
     public int minPathLength = 30;
-
     private EnemyWaveManager waveManager;
     public GridCellObject[] gridCells;
     public GridCellObject[] sceneryCells;
@@ -24,9 +23,6 @@ public class GridManager : MonoBehaviour
         {
             pathCells = _pathGenerator.GenerateEasyPath();
             
-           
-            
-
             // for maximum difficulty make the crossroads in a while loop and you'll get more crossroads
             while (_pathGenerator.GenerateCrossroads()) ;
 
