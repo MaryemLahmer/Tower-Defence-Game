@@ -10,7 +10,6 @@ public class EnemyWaveManager : MonoBehaviour
     int nextPathCellIndex;
     bool enemyRunCompleted;
 
-    // Start is called before the first frame update
     void Start()
     {
         enemyInstance = Instantiate(enemyObject, new Vector3(0, 0.2f, 5f), Quaternion.identity);
@@ -18,7 +17,6 @@ public class EnemyWaveManager : MonoBehaviour
         enemyRunCompleted = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (pathCells != null && pathCells.Count > 1 && !enemyRunCompleted)
@@ -30,9 +28,7 @@ public class EnemyWaveManager : MonoBehaviour
                 nextPathCellIndex++;
                 if (nextPathCellIndex >= pathCells.Count)
                 {
-                    Debug.Log("Reached end");
                     enemyRunCompleted = true;
-
                 }
             }
         }
