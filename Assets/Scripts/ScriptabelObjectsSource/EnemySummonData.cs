@@ -8,5 +8,4 @@ public class EnemySummonData : ScriptableObject
     public GameObject enemeyPrefab;
     public int enemyId;
     
-
 }

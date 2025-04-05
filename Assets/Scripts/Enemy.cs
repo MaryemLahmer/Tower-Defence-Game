@@ -13,28 +13,7 @@ public class Enemy : MonoBehaviour
     {
         health = maxHealth;
     }
-    void Start()
-    {
-        nextPathCellIndex = 1;
-        enemyRunCompleted = false;
-    }
-/*
-    void Update()
-    {
-        if (pathCells != null && pathCells.Count > 1 && !enemyRunCompleted)
-        {
-            Vector3 currentPos = transform.position;
-            Vector3 nextPos =  new Vector3(pathCells[nextPathCellIndex].x, 0.2f, pathCells[nextPathCellIndex].y);
-            transform.position = Vector3.MoveTowards(currentPos, nextPos, Time.deltaTime );
-            if (Vector3.Distance(currentPos, nextPos) < 0.05f) {
-                nextPathCellIndex++;
-                if (nextPathCellIndex >= pathCells.Count)
-                {
-                    enemyRunCompleted = true;
-                }
-            }
-        }
-    }
-    */
+   
+
 
 }

@@ -17,7 +17,9 @@ public class EntitySummoner : MonoBehaviour
             enemyPrefabs = new Dictionary<int, GameObject>();
             enemyobjectPools = new Dictionary<int, Queue<Enemy>>();
             enemiesAlive = new List<Enemy>();
+        
             EnemySummonData[] enemies = Resources.LoadAll<EnemySummonData>("Enemies");
+        
             foreach (EnemySummonData enemy in enemies)
             {
                 enemyPrefabs.Add(enemy.enemyId, enemy.enemeyPrefab);
@@ -25,7 +27,6 @@ public class EntitySummoner : MonoBehaviour
             }
 
             isInialized = true;
-
         }
     }
 
@@ -44,7 +45,7 @@ public class EntitySummoner : MonoBehaviour
             else
             {
                 // instantiate new enemy and initialize
-                GameObject newEnemy = Instantiate(enemyPrefabs[enemyID], new Vector3(0, 0.2f, 5f), Quaternion.identity);
+                GameObject newEnemy = Instantiate(enemyPrefabs[enemyID], new Vector3(0, 0.2f, 5f), enemyPrefabs[enemyID].transform.rotation);
                 summonedEnemy = newEnemy.GetComponent<Enemy>();
                 summonedEnemy.Init();
             }

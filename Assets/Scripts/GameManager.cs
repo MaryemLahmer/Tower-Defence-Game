@@ -26,15 +26,15 @@ public class GameManager : MonoBehaviour
     {
         while (!loopShouldEnd)
         {
-            // spawn Enemies 
-            Debug.Log("enemies to summon: "+enemyIDsToSummon.Count);
+            
 
             if (enemyIDsToSummon.Count > 0)
             {
-                Debug.Log("summoning enemy");
+                // spawn Enemies 
                 for (int i = 0; i < enemyIDsToSummon.Count; i++)
                 {
-                    waveManager.MoveEnemy(EntitySummoner.SummonEnemy(enemyIDsToSummon.Dequeue()));
+                    Enemy summonedEnemey = EntitySummoner.SummonEnemy(enemyIDsToSummon.Dequeue());
+                    waveManager.MoveEnemy(summonedEnemey);
                 }
             }
 
