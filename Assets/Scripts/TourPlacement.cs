@@ -21,8 +21,12 @@ public class TourPlacement : MonoBehaviour
             if (didHit)
             {
                 CurrentPlacingTower.transform.position = hit.point;
-
-
+                if (Input.GetKeyDown(KeyCode.C)) // to cancel tower placement
+                {
+                    Destroy(CurrentPlacingTower);
+                    CurrentPlacingTower = null;
+                    return;
+                }
                 if (Input.GetMouseButtonDown(0))
                 {
                     // Get the position where the ray hit
@@ -34,6 +38,7 @@ public class TourPlacement : MonoBehaviour
                     {
                         if (col.gameObject.CompareTag("VirginCell"))
                         {
+                            GameManager.towersInGame.Add(CurrentPlacingTower.GetComponent<TowerBehavior>());
                             CurrentPlacingTower = null;
                             break;
                         }

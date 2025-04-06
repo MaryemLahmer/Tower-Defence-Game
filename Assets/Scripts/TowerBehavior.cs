@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class TowerBehavior : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public LayerMask EnemiesLayer;
+    public float damage, fireRate, range, delay;
+    public Transform towerPivot;
+    public Enemy target;
+    
     void Start()
     {
-        
+        delay = 1 / fireRate;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Tick()
     {
-        
+        if (target)
+        {
+            towerPivot.transform.rotation = Quaternion.LookRotation(target.transform.position - transform.position);
+            
+        }
     }
 }

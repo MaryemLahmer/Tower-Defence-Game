@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4436756582140507275}
   - component: {fileID: 5342430031546050405}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Demon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,6 +57,7 @@ MonoBehaviour:
   health: 0
   speed: 2
   id: 1
+  currentPathIndex: 0
 --- !u!1 &1099543600657538022
 GameObject:
   m_ObjectHideFlags: 0
@@ -68,7 +69,7 @@ GameObject:
   - component: {fileID: 4798508330806941254}
   - component: {fileID: 2357430029394876868}
   - component: {fileID: 7155167849575828278}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +150,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7249942329266030410}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Empty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +183,7 @@ GameObject:
   - component: {fileID: 2660480288690064229}
   - component: {fileID: 1735411463640334132}
   - component: {fileID: 7969558378980800074}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,7 +266,7 @@ GameObject:
   - component: {fileID: 6957590553005643063}
   - component: {fileID: 69088496569947886}
   - component: {fileID: 3611784580276151273}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: old_low_poly_mesh.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -348,7 +349,7 @@ GameObject:
   - component: {fileID: 391553316719555274}
   - component: {fileID: 8508125646996570732}
   - component: {fileID: 5769293876178794844}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -431,7 +432,7 @@ GameObject:
   - component: {fileID: 3336139158227261542}
   - component: {fileID: 8022136566749299524}
   - component: {fileID: 2054840994513867297}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -514,7 +515,7 @@ GameObject:
   - component: {fileID: 2095796062297789845}
   - component: {fileID: 1644353635405280613}
   - component: {fileID: 6974284661024310211}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: old_low_poly_mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -597,7 +598,7 @@ GameObject:
   - component: {fileID: 7167173403674944245}
   - component: {fileID: 8768244495759867}
   - component: {fileID: 6199790389735534396}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -680,7 +681,7 @@ GameObject:
   - component: {fileID: 9214062796847355957}
   - component: {fileID: 5681790255090775032}
   - component: {fileID: 4200227156226078740}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}

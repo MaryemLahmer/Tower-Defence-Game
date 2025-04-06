@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7826571163575206752}
   - component: {fileID: 1893077612575350823}
   - component: {fileID: 421627551217189790}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 4321861569837989793}
   - component: {fileID: 1506523907978929979}
   - component: {fileID: 5013956986915766196}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2539539315308723518}
   - component: {fileID: -1537064500698903749}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GhostWithHat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -219,6 +219,7 @@ MonoBehaviour:
   health: 0
   speed: 5
   id: 1
+  currentPathIndex: 0
 --- !u!1 &5868925433557121020
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,7 +231,7 @@ GameObject:
   - component: {fileID: 3183612857304068904}
   - component: {fileID: 8082306763091821635}
   - component: {fileID: 331734170701274416}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Rim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -313,7 +314,7 @@ GameObject:
   - component: {fileID: 330006394299548208}
   - component: {fileID: 2006446658515194456}
   - component: {fileID: 5943171614260019173}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}

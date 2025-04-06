@@ -6,7 +6,8 @@ public class GameManager : MonoBehaviour
 {
     private static Queue<int> enemyIDsToSummon;
     private static Queue<Enemy> enemiesToRemove;
-
+    public static List<TowerBehavior> towersInGame;
+    public static float[] nodeDistances;
     public bool loopShouldEnd;
     private EnemyWaveManager waveManager;
 
@@ -15,16 +16,21 @@ public class GameManager : MonoBehaviour
         waveManager = GetComponent<EnemyWaveManager>();
         enemiesToRemove = new Queue<Enemy>();
         enemyIDsToSummon = new Queue<int>();
+        towersInGame = new List<TowerBehavior>();
         EntitySummoner.Init();
         StartCoroutine(GameLoop());
-       // InvokeRepeating("SummonTest", 0, 1);
-       EnqueueEnemyIDToSummon(1);
-       
+        InvokeRepeating("SummonTest", 0, 1);
+        EnqueueEnemyIDToSummon(1);
     }
 
     void SummonTest()
     {
-        EnqueueEnemyIDToSummon(1);
+        //EnqueueEnemyIDToSummon(1);
+        EnqueueEnemyIDToSummon(2);
+        EnqueueEnemyIDToSummon(3);
+        EnqueueEnemyIDToSummon(4);
+
+
     }
 
     IEnumerator GameLoop()
@@ -54,6 +60,7 @@ public class GameManager : MonoBehaviour
                     EntitySummoner.RemoveEnemey(enemiesToRemove.Dequeue());
                 }
             }
+
             // remove towers
             yield return null;
         }
@@ -68,6 +75,4 @@ public class GameManager : MonoBehaviour
     {
         enemiesToRemove.Enqueue(enemeyToRemove);
     }
-    
-    
 }
