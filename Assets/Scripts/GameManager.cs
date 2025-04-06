@@ -5,16 +5,21 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private static Queue<int> enemyIDsToSummon;
+    private static Queue<Enemy> enemiesToRemove;
+
     public bool loopShouldEnd;
     private EnemyWaveManager waveManager;
 
     void Start()
     {
         waveManager = GetComponent<EnemyWaveManager>();
+        enemiesToRemove = new Queue<Enemy>();
         enemyIDsToSummon = new Queue<int>();
         EntitySummoner.Init();
         StartCoroutine(GameLoop());
-        InvokeRepeating("SummonTest", 0, 1);
+       // InvokeRepeating("SummonTest", 0, 1);
+       EnqueueEnemyIDToSummon(1);
+       
     }
 
     void SummonTest()
@@ -26,15 +31,13 @@ public class GameManager : MonoBehaviour
     {
         while (!loopShouldEnd)
         {
-            
-
             if (enemyIDsToSummon.Count > 0)
             {
                 // spawn Enemies 
                 for (int i = 0; i < enemyIDsToSummon.Count; i++)
                 {
                     Enemy summonedEnemey = EntitySummoner.SummonEnemy(enemyIDsToSummon.Dequeue());
-                    waveManager.MoveEnemy(summonedEnemey);
+                    summonedEnemey.SetPath(waveManager.GetPathCells());
                 }
             }
 
@@ -44,6 +47,13 @@ public class GameManager : MonoBehaviour
             // apply effects
             // damage enemies
             // remove enemies 
+            if (enemiesToRemove.Count > 0)
+            {
+                for (int i = 0; i < enemiesToRemove.Count; i++)
+                {
+                    EntitySummoner.RemoveEnemey(enemiesToRemove.Dequeue());
+                }
+            }
             // remove towers
             yield return null;
         }
@@ -53,4 +63,11 @@ public class GameManager : MonoBehaviour
     {
         enemyIDsToSummon.Enqueue(ID);
     }
+
+    public static void EnqueueEnemeyToRemove(Enemy enemeyToRemove)
+    {
+        enemiesToRemove.Enqueue(enemeyToRemove);
+    }
+    
+    
 }

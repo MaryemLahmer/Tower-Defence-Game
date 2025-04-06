@@ -33,6 +33,8 @@ public class GridManager : MonoBehaviour
         }
         
 
+        // set the path in the wave manager
+        waveManager.SetPathCells(pathCells);
         StartCoroutine(LayGrid(pathCells));
     }
 
