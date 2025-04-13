@@ -240,14 +240,11 @@ MonoBehaviour:
   damage: 10
   fireRate: 5
   range: 10
-  cooldownTimer: 0
-  projectilePrefab: {fileID: 0}
-  firePoint: {fileID: 8416780138465643518}
   towerPivot: {fileID: 6154887622360904249}
   target: {fileID: 0}
+  firePoint: {fileID: 0}
   targetingMethod: 0
-  showRange: 1
-  timeBetweenShots: 1
+  showRangeVisually: 1
 --- !u!114 &7650888503480083608
 MonoBehaviour:
   m_ObjectHideFlags: 0

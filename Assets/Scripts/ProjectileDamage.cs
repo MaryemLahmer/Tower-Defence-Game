@@ -15,7 +15,7 @@ public class ProjectileDamage : MonoBehaviour, IDamageMethod
         this.damage = damage;
         this.fireRate = fireRate;
         delay = 1f / fireRate;
-        if (firePoint) firePoint = transform;
+        if (firePoint == null) firePoint = transform;
     }
 
 
@@ -46,11 +46,5 @@ public class ProjectileDamage : MonoBehaviour, IDamageMethod
     
    
 
-    void Start()
-    {
-    }
 
-    void Update()
-    {
-    }
 }
