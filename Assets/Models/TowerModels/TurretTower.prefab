@@ -293,7 +293,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2036899583330090485}
   - component: {fileID: 5218088419684050282}
-  - component: {fileID: 1639159186906952906}
+  - component: {fileID: 3358702089254585021}
   m_Layer: 0
   m_Name: TurretTower
   m_TagString: Untagged
@@ -335,18 +335,15 @@ MonoBehaviour:
   EnemiesLayer:
     serializedVersion: 2
     m_Bits: 128
-  damage: 2
+  damage: 15
   fireRate: 2
-  range: 2
-  cooldownTimer: 0
-  projectilePrefab: {fileID: 8985181710163268192}
-  firePoint: {fileID: 4501369225801404049}
+  range: 15
   towerPivot: {fileID: 3402998350789702597}
   target: {fileID: 0}
+  firePoint: {fileID: 4501369225801404049}
   targetingMethod: 0
-  showRange: 1
-  timeBetweenShots: 0.5
---- !u!114 &1639159186906952906
+  showRangeVisually: 1
+--- !u!114 &3358702089254585021
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -355,9 +352,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5931691036288507535}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05b3e3237f1239545acfed7be45bded3, type: 3}
+  m_Script: {fileID: 11500000, guid: 4010ab62e2e9134419a930ac17ab4c15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 8985181710163268192}
+  firePoint: {fileID: 4501369225801404049}
 --- !u!1 &6180187759601639444
 GameObject:
   m_ObjectHideFlags: 0
@@ -535,6 +534,7 @@ GameObject:
   - component: {fileID: 8645248292376938714}
   - component: {fileID: 4635835765641774975}
   - component: {fileID: 7471818509588231093}
+  - component: {fileID: 6432228099106638254}
   m_Layer: 0
   m_Name: ammo
   m_TagString: Untagged
@@ -607,3 +607,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6432228099106638254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8985181710163268192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 612aba0b3edec124c8d523ba3125bf64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 15
+  damage: 10
+  explosionRadius: 0
+  impactEffect: {fileID: 0}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128

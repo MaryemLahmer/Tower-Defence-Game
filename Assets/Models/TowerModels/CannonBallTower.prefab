@@ -55,14 +55,11 @@ MonoBehaviour:
   damage: 15
   fireRate: 2
   range: 15
-  cooldownTimer: 0
-  projectilePrefab: {fileID: 0}
-  firePoint: {fileID: 0}
   towerPivot: {fileID: 8462743141877239557}
   target: {fileID: 0}
+  firePoint: {fileID: 4804394690439483865}
   targetingMethod: 2
-  showRange: 1
-  timeBetweenShots: 15
+  showRangeVisually: 1
 --- !u!114 &2612491334463927546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -451,6 +448,7 @@ GameObject:
   - component: {fileID: 8610841799925498129}
   - component: {fileID: 4670234376610123444}
   - component: {fileID: 7436839510613883518}
+  - component: {fileID: 3657193249385651923}
   m_Layer: 0
   m_Name: cannonBall
   m_TagString: Untagged
@@ -523,6 +521,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3657193249385651923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8949789707719760811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 612aba0b3edec124c8d523ba3125bf64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 4
+  damage: 20
+  explosionRadius: 10
+  impactEffect: {fileID: 0}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &9095693037233182143
 GameObject:
   m_ObjectHideFlags: 0

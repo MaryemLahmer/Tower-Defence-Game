@@ -48,16 +48,12 @@ public class TowerTargeting
         foreach (Enemy enemy in enemies)
         {
             // higher node index means further along the path
-            if (enemy.currentPathIndex > highestNodeIndex)
+            if (enemy.currentPathIndex >= highestNodeIndex)
             {
                 furthestAlongPath = enemy;
                 highestNodeIndex = enemy.currentPathIndex;
             }
-            // if same node index, compare distance to next node
-            else if (enemy.currentPathIndex == highestNodeIndex)
-            {
-                // for now we'll just use the first one found with the highest index
-            }
+           
         }
 
         return furthestAlongPath;
@@ -116,17 +112,5 @@ public class TowerTargeting
     }
 
 
-    struct EnemyData
-    {
-        public EnemyData(Vector3 position, int np, float h)
-        {
-            enemyPosition = position;
-            nodeIndex = np;
-            health = h;
-        }
-
-        public Vector3 enemyPosition;
-        public int nodeIndex;
-        public float health;
-    }
+  
 }
