@@ -9,6 +9,9 @@ public class Enemy : MonoBehaviour
     public int currentPathIndex;
     private List<Vector2Int> pathCells;
     private bool reachedEnd = false;
+    
+    // optional visual feedback for damage
+    public GameObject damageEffect; 
     public void Init()
     {
         health = maxHealth;
@@ -72,6 +75,21 @@ public class Enemy : MonoBehaviour
     {
         // add trigger to enemy damage 
         // add another trigger to handle score and lives remaining for player 
+        GameManager.EnqueueEnemeyToRemove(this);
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        
+        // show damage effect if availabel
+        if (damageEffect) Instantiate(damageEffect, transform.position, Quaternion.identity);
+        if (health <= 0) Die();
+    }
+
+    private void Die()
+    {
+        // Queue for removal
         GameManager.EnqueueEnemeyToRemove(this);
     }
 

@@ -357,6 +357,7 @@ GameObject:
   m_Component:
   - component: {fileID: 483982506518559245}
   - component: {fileID: 519348898179869939}
+  - component: {fileID: 7759031493433508721}
   m_Layer: 7
   m_Name: Ghost
   m_TagString: Untagged
@@ -400,9 +401,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   health: 0
-  speed: 5
+  speed: 0.65
   id: 1
   currentPathIndex: 0
+  damageEffect: {fileID: 0}
+--- !u!65 &7759031493433508721
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7366629821905038689}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.08081, y: 3.5600188, z: 1.1582265}
+  m_Center: {x: -0.022769967, y: 1.774949, z: 0.079113044}
 --- !u!1 &7441554768235780097
 GameObject:
   m_ObjectHideFlags: 0

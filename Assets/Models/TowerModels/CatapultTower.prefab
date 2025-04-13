@@ -92,6 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2482934338557499738}
+  - component: {fileID: -7713784078621387945}
   m_Layer: 0
   m_Name: CatapultTower
   m_TagString: Untagged
@@ -117,6 +118,32 @@ Transform:
   - {fileID: 7853923288942701937}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-7713784078621387945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495742883894667982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a02281c2dfeb1c44a7aca93c4ed5cdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemiesLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  damage: 5
+  fireRate: 5
+  range: 5
+  cooldownTimer: 0
+  projectilePrefab: {fileID: 0}
+  firePoint: {fileID: 0}
+  towerPivot: {fileID: 7853923288942701937}
+  target: {fileID: 0}
+  targetingMethod: 3
+  showRange: 1
+  timeBetweenShots: 0
 --- !u!1 &1973144408464509656
 GameObject:
   m_ObjectHideFlags: 0

@@ -981,6 +981,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8109081270572275049}
   - component: {fileID: 6120996615218522264}
+  - component: {fileID: 6891484025193990108}
   m_Layer: 7
   m_Name: Skeleton
   m_TagString: Untagged
@@ -1020,9 +1021,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 50
   health: 50
-  speed: 3
+  speed: 1
   id: 1
   currentPathIndex: 0
+  damageEffect: {fileID: 0}
+--- !u!65 &6891484025193990108
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5694362300255529554}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.3645831, y: 0.45370385, z: 0.06913264}
+  m_Center: {x: -0.031313658, y: 0.23895799, z: 0.066687055}
 --- !u!1 &5745356117340406197
 GameObject:
   m_ObjectHideFlags: 0

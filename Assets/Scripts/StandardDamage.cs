@@ -24,8 +24,12 @@ public class StandardDamage : MonoBehaviour, IDamageMethod
             delay -= Time.deltaTime;
             return;
         }
-        // add function to apply damage to the enemy here
-        // enemy.applyDamage(damage);
+        
+        // apply damage to the enemy here
+        Enemy enemy = target.GetComponent<Enemy>();
+        if (enemy) enemy.TakeDamage(damage);
+        
+        // reset cooldown
         delay = 1f/fireRate;
     }
 

@@ -50,6 +50,12 @@ public class GameManager : MonoBehaviour
             //spawn towers
             // move enemies
             // tick towers
+            foreach (TowerBehavior tower in towersInGame)
+            {
+                tower.target = TowerTargeting.GetTarget(tower, TowerTargeting.TargetType.First);
+                tower.Tick();
+            }
+            
             // apply effects
             // damage enemies
             // remove enemies 

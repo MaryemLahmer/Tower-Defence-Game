@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2473357110396296782}
+  - component: {fileID: 8899834676360590997}
+  - component: {fileID: 2612491334463927546}
   m_Layer: 0
   m_Name: CannonBallTower
   m_TagString: Untagged
@@ -35,6 +37,46 @@ Transform:
   - {fileID: 8462743141877239557}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8899834676360590997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 514070166564619910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a02281c2dfeb1c44a7aca93c4ed5cdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemiesLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  damage: 15
+  fireRate: 2
+  range: 15
+  cooldownTimer: 0
+  projectilePrefab: {fileID: 0}
+  firePoint: {fileID: 0}
+  towerPivot: {fileID: 8462743141877239557}
+  target: {fileID: 0}
+  targetingMethod: 2
+  showRange: 1
+  timeBetweenShots: 15
+--- !u!114 &2612491334463927546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 514070166564619910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4010ab62e2e9134419a930ac17ab4c15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 8949789707719760811}
+  firePoint: {fileID: 4804394690439483865}
 --- !u!1 &1983852355181402214
 GameObject:
   m_ObjectHideFlags: 0

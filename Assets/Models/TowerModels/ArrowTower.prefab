@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5271075785098366172}
   - component: {fileID: 1736578765625229545}
   - component: {fileID: 4374300098272124133}
+  - component: {fileID: 3792834517642335800}
   m_Layer: 0
   m_Name: weapon-ammo-arrow
   m_TagString: Untagged
@@ -83,6 +84,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3792834517642335800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375906935385149075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 612aba0b3edec124c8d523ba3125bf64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 15
+  damage: 10
+  explosionRadius: 0
+  impactEffect: {fileID: 0}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &1778816852578064995
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,6 +195,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8125876976877925285}
+  - component: {fileID: 3115283205315714376}
+  - component: {fileID: 7650888503480083608}
   m_Layer: 0
   m_Name: ArrowTower
   m_TagString: Untagged
@@ -200,6 +222,46 @@ Transform:
   - {fileID: 6154887622360904249}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3115283205315714376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3793147321027664187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a02281c2dfeb1c44a7aca93c4ed5cdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemiesLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  damage: 10
+  fireRate: 5
+  range: 10
+  cooldownTimer: 0
+  projectilePrefab: {fileID: 0}
+  firePoint: {fileID: 8416780138465643518}
+  towerPivot: {fileID: 6154887622360904249}
+  target: {fileID: 0}
+  targetingMethod: 0
+  showRange: 1
+  timeBetweenShots: 1
+--- !u!114 &7650888503480083608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3793147321027664187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4010ab62e2e9134419a930ac17ab4c15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 1375906935385149075}
+  firePoint: {fileID: 8416780138465643518}
 --- !u!1 &5373637176891192936
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,6 +377,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4653023914505809776}
+  - {fileID: 8416780138465643518}
   - {fileID: 5271075785098366172}
   m_Father: {fileID: 8125876976877925285}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -451,3 +514,34 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8675978315665748289
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8416780138465643518}
+  m_Layer: 0
+  m_Name: WeaponFirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8416780138465643518
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8675978315665748289}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.4438228e-15, y: 0.41000003, z: 0.45}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6154887622360904249}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
