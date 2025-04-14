@@ -7,11 +7,15 @@ using TMPro;
 public class TowerDefenseUI : MonoBehaviour
 {
     [Header("UI Elements")]
-    [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private TextMeshProUGUI multiplierText;
-    [SerializeField] private TextMeshProUGUI moneyText;
-    [SerializeField] private TextMeshProUGUI waveNumberText;
-    [SerializeField] private TextMeshProUGUI enemiesRemainingText;
+    [SerializeField] public TextMeshProUGUI scoreText;
+    [SerializeField] public TextMeshProUGUI multiplierText;
+    [SerializeField] public TextMeshProUGUI moneyText;
+    [SerializeField] public TextMeshProUGUI waveNumberText;
+    [SerializeField] public TextMeshProUGUI enemiesRemainingText;
+    
+    [Header("Phase Information")]
+    [SerializeField] private TextMeshProUGUI phaseText;
+    [SerializeField] private TextMeshProUGUI timerText;
     
     [Header("Tower Selection")]
     [SerializeField] private GameObject towerSelectionPanel;
@@ -26,6 +30,8 @@ public class TowerDefenseUI : MonoBehaviour
         UpdateMoney(100);
         UpdateWaveNumber(1);
         UpdateEnemiesRemaining(20);
+        UpdatePhaseStatus("PLACEMENT PHASE");
+        UpdatePhaseTimer(5);
     }
     
     // Public methods to update UI values
@@ -51,12 +57,49 @@ public class TowerDefenseUI : MonoBehaviour
     
     public void UpdateWaveNumber(int waveNumber)
     {
-        waveNumberText.text = "Vague: " + waveNumber.ToString();
+        waveNumberText.text = "Wave: " + waveNumber.ToString();
     }
     
     public void UpdateEnemiesRemaining(int enemies)
     {
         enemiesRemainingText.text = "Enemies: " + enemies.ToString();
+    }
+    
+    // New methods for phase information
+    public void UpdatePhaseStatus(string phase)
+    {
+        if (phaseText != null)
+        {
+            phaseText.text = phase;
+            
+            // Optional: Change color based on phase
+            if (phase.Contains("PLACEMENT"))
+            {
+                phaseText.color = new Color(0.2f, 0.6f, 1f); // Blue for placement
+            }
+            else if (phase.Contains("DEFENSE"))
+            {
+                phaseText.color = new Color(1f, 0.5f, 0.2f); // Orange for defense
+            }
+        }
+    }
+    
+    public void UpdatePhaseTimer(int seconds)
+    {
+        if (timerText != null)
+        {
+            timerText.text = seconds.ToString() + "s";
+            
+            // Optional: Change color as time runs out
+            if (seconds <= 3)
+            {
+                timerText.color = Color.red;
+            }
+            else
+            {
+                timerText.color = Color.white;
+            }
+        }
     }
     
     // Toggle tower selection panel visibility
