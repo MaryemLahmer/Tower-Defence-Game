@@ -5,7 +5,7 @@ using UnityEngine;
 public interface IDamageMethod
 {
     // public void DamageTick(Enemy target);
-    public void DamageTick(GameObject target); // waiting for enemy part to be ready and change the code
+    public void DamageTick(GameObject target); 
     public void Init(float damage, float fireRat);
 }
 public class StandardDamage : MonoBehaviour, IDamageMethod
@@ -24,8 +24,12 @@ public class StandardDamage : MonoBehaviour, IDamageMethod
             delay -= Time.deltaTime;
             return;
         }
-        // add function to apply damage to the enemy here
-        // enemy.applyDamage(damage);
+        
+        // apply damage to the enemy here
+        Enemy enemy = target.GetComponent<Enemy>();
+        if (enemy) enemy.TakeDamage(damage);
+        
+        // reset cooldown
         delay = 1f/fireRate;
     }
 

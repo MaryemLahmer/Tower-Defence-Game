@@ -842,8 +842,7 @@ MonoBehaviour:
         m_MethodName: SetTowerToPlacement
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1495742883894667982, guid: 951eb398c50bd604f93b10096021ced5,
-            type: 3}
+          m_ObjectArgument: {fileID: 1495742883894667982, guid: 951eb398c50bd604f93b10096021ced5, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -1778,6 +1777,8 @@ GameObject:
   - component: {fileID: 693872037}
   - component: {fileID: 693872039}
   - component: {fileID: 693872040}
+  - component: {fileID: 693872041}
+  - component: {fileID: 693872042}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1797,8 +1798,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd65c8f251d62d7428aba28188558904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridWidth: 20
-  gridHeight: 10
+  gridWidth: 28
+  gridHeight: 15
   minPathLength: 45
   gridCells:
   - {fileID: 11400000, guid: 9d3f435ca0200e44ebda8b31e95bc1f7, type: 2}
@@ -1873,8 +1874,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0da55a389cfa0cd4992606816224cac5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyObject: {fileID: 7582364259912719064, guid: 6ede777abce0211438ce386d3232f4cc,
-    type: 3}
+  baseEnemeySpeed: 2
+--- !u!114 &693872041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693872036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ff50a929862a94692e8b5faae288e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loopShouldEnd: 0
+--- !u!114 &693872042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693872036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4234ff6d30be3754887685d9e9ddc54c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &718996684
 GameObject:
   m_ObjectHideFlags: 0
@@ -2291,8 +2316,7 @@ MonoBehaviour:
         m_MethodName: SetTowerToPlacement
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 3793147321027664187, guid: 99fdd7b8d7cdd5b4b933816bc447f435,
-            type: 3}
+          m_ObjectArgument: {fileID: 3793147321027664187, guid: 99fdd7b8d7cdd5b4b933816bc447f435, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -2453,8 +2477,7 @@ MonoBehaviour:
         m_MethodName: SetTowerToPlacement
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 5931691036288507535, guid: 13845911b5eb9a7459578b79761264a6,
-            type: 3}
+          m_ObjectArgument: {fileID: 5931691036288507535, guid: 13845911b5eb9a7459578b79761264a6, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -2699,8 +2722,7 @@ MonoBehaviour:
         m_MethodName: SetTowerToPlacement
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 514070166564619910, guid: df1a1b1a15fa8274e9dafb930b3ac805,
-            type: 3}
+          m_ObjectArgument: {fileID: 514070166564619910, guid: df1a1b1a15fa8274e9dafb930b3ac805, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -4112,13 +4134,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1741037746}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: 8, y: 7, z: -4.5}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 14, y: 9, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
 --- !u!1 &1809362289
 GameObject:
   m_ObjectHideFlags: 0
