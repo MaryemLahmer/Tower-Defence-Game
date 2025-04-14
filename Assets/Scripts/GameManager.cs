@@ -10,19 +10,41 @@ public class GameManager : MonoBehaviour
     public static float[] nodeDistances;
     public bool loopShouldEnd;
     private EnemyWaveManager waveManager;
+    private WaveManager phaseManager;
 
     void Start()
     {
         waveManager = GetComponent<EnemyWaveManager>();
         enemiesToRemove = new Queue<Enemy>();
+        phaseManager = FindObjectOfType<WaveManager>();
         enemyIDsToSummon = new Queue<int>();
         towersInGame = new List<TowerBehavior>();
         EntitySummoner.Init();
         StartCoroutine(GameLoop());
-        InvokeRepeating("SummonTest", 0, 1);
+        //InvokeRepeating("SummonTest", 0, 1);
         EnqueueEnemyIDToSummon(1);
+        // Remove the test summoning since we'll use the wave manager now
+        // InvokeRepeating("SummonTest", 0, 1);
+        
+        // Listen for wave phase start
+        if (phaseManager != null)
+        {
+            phaseManager.onWavePhaseStart.AddListener(OnWavePhaseStarted);
+        }
+    }
+    void OnWavePhaseStarted()
+    {
+        // Wave phase has started, enemies will be spawned by the WaveManager
+        // Any additional setup for the wave phase can go here
     }
 
+    // This can be removed since we're using the WaveManager to spawn enemies
+    /*
+    void SummonTest()
+    {
+        EnqueueEnemyIDToSummon(1);
+    }
+    */
     void SummonTest()
     {
         //EnqueueEnemyIDToSummon(1);
@@ -37,13 +59,17 @@ public class GameManager : MonoBehaviour
     {
         while (!loopShouldEnd)
         {
+            
+
             if (enemyIDsToSummon.Count > 0)
             {
                 // spawn Enemies 
                 for (int i = 0; i < enemyIDsToSummon.Count; i++)
                 {
                     Enemy summonedEnemey = EntitySummoner.SummonEnemy(enemyIDsToSummon.Dequeue());
+                    waveManager.MoveEnemy(summonedEnemey);
                     summonedEnemey.SetPath(waveManager.GetPathCells());
+
                 }
             }
 
@@ -80,5 +106,12 @@ public class GameManager : MonoBehaviour
     public static void EnqueueEnemeyToRemove(Enemy enemeyToRemove)
     {
         enemiesToRemove.Enqueue(enemeyToRemove);
+    }
+    
+    // Add a method to notify when all enemies are cleared
+    public void NotifyAllEnemiesCleared()
+    {
+        // This would be called when all enemies from a wave are dead or reached the end
+        // It will help the WaveManager know if we need to end a wave early
     }
 }

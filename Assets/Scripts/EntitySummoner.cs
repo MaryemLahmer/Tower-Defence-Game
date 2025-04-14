@@ -8,7 +8,7 @@ public class EntitySummoner : MonoBehaviour
     public static Dictionary<int, GameObject> enemyPrefabs;
     public static Dictionary<int, Queue<Enemy>> enemyobjectPools;
 
-    private static bool isInialized;
+    public static bool isInialized;
 
     public static void Init()
     {
