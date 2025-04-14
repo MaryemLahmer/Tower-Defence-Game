@@ -21,8 +21,8 @@ public class GameManager : MonoBehaviour
         towersInGame = new List<TowerBehavior>();
         EntitySummoner.Init();
         StartCoroutine(GameLoop());
+        
         //InvokeRepeating("SummonTest", 0, 1);
-        EnqueueEnemyIDToSummon(1);
         // Remove the test summoning since we'll use the wave manager now
         // InvokeRepeating("SummonTest", 0, 1);
         
@@ -36,6 +36,10 @@ public class GameManager : MonoBehaviour
     {
         // Wave phase has started, enemies will be spawned by the WaveManager
         // Any additional setup for the wave phase can go here
+        EnqueueEnemyIDToSummon(1);
+        EnqueueEnemyIDToSummon(2);
+        EnqueueEnemyIDToSummon(3);
+        EnqueueEnemyIDToSummon(4);
     }
 
     // This can be removed since we're using the WaveManager to spawn enemies
@@ -45,15 +49,7 @@ public class GameManager : MonoBehaviour
         EnqueueEnemyIDToSummon(1);
     }
     */
-    void SummonTest()
-    {
-        //EnqueueEnemyIDToSummon(1);
-        EnqueueEnemyIDToSummon(2);
-        EnqueueEnemyIDToSummon(3);
-        EnqueueEnemyIDToSummon(4);
-
-
-    }
+   
 
     IEnumerator GameLoop()
     {
