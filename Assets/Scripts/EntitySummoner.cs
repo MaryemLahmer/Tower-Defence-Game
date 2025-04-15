@@ -24,14 +24,19 @@ public class EntitySummoner : MonoBehaviour
             {
                 enemyPrefabs.Add(enemy.enemyId, enemy.enemeyPrefab);
                 enemyobjectPools.Add(enemy.enemyId, new Queue<Enemy>());
+                Debug.Log($"Registered enemy ID {enemy.enemyId}");
+
             }
 
             isInialized = true;
         }
+        Debug.Log("EntitySummoner initialized.");
+
     }
 
     public static Enemy SummonEnemy(int enemyID)
-    {
+    {   
+        Debug.Log($"Summoned enemy {enemyID}");
         Enemy summonedEnemy = null;
         if (enemyobjectPools.ContainsKey(enemyID))
         {

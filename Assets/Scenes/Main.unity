@@ -661,15 +661,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyTypes:
   - enemyID: 1
+    baseCount: 5
+    spawnDelay: 1
+    additionalPerWave: 3
+    spawnChance: 1
+  - enemyID: 2
+    baseCount: 2
+    spawnDelay: 2
+    additionalPerWave: 1
+    spawnChance: 1
+  - enemyID: 3
     baseCount: 0
-    spawnDelay: 0
-    additionalPerWave: 0
-    spawnChance: 0.405
-  - enemyID: 1
-    baseCount: 0
-    spawnDelay: 0
-    additionalPerWave: 0
-    spawnChance: 0.405
+    spawnDelay: 2
+    additionalPerWave: 1
+    spawnChance: 0.8
   baseEnemyCount: 6
   additionalEnemiesPerWave: 3
   spawnDelayReductionPerWave: 0.05

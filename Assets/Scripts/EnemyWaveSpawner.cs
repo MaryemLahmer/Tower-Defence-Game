@@ -53,7 +53,8 @@ public class EnemyWaveSpawner : MonoBehaviour
     }
     
     public void StartWaveSpawning()
-    {
+    {   
+        Debug.Log("StartWaveSpawning called.");
         currentWave++;
         StopAllCoroutines();
         StartCoroutine(SpawnWave());
@@ -103,7 +104,7 @@ public class EnemyWaveSpawner : MonoBehaviour
             // Check each enemy type
             List<int> completedTypes = new List<int>();
             
-            foreach (var enemyID in enemyCounts.Keys)
+            foreach (var enemyID in new List<int>(enemyCounts.Keys))
             {
                 // Check if it's time to spawn this enemy type
                 if (Time.time >= nextSpawnTimes[enemyID])

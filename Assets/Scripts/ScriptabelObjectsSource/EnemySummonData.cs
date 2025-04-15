@@ -7,5 +7,7 @@ public class EnemySummonData : ScriptableObject
 {
     public GameObject enemeyPrefab;
     public int enemyId;
-    
+    public int health;
+    public int damage; 
+    public float speed;
 }
