@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,9 +10,38 @@ public class Projectile : MonoBehaviour
     public float explosionRadius = 0f;
 
     public GameObject impactEffect; // particle effect on Hit
+    public AudioClip impactSound; // spund effect on hit
+    public float soundVolume = 0.5f;
+    private AudioSource audioSource;
+    public enum ProjectileType {Arrow, Cannon, Turret, Catapult }
+    public ProjectileType type = ProjectileType.Arrow;
+    
     public LayerMask enemyLayer;
     private Enemy target;
     private bool hasHit = false;
+
+
+    private void Awake()
+    {
+        // add audio source component if it doesn't exist
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.playOnAwake = false;
+            audioSource.spatialBlend = 1f; // 3d sound
+            audioSource.maxDistance = 20f;
+            audioSource.rolloffMode = AudioRolloffMode.Linear;
+        }
+        
+      
+        
+        // set the appropriate sound based on projectile type if not already set
+        if (impactSound == null)
+        {
+            SetSoundBasedOnType();
+        }
+    }
 
     public void Seek(Enemy _target)
     {
@@ -47,6 +77,10 @@ public class Projectile : MonoBehaviour
     void HitTarget()
     {
         hasHit = true;
+        
+        // Play Impact sound
+        PlayImpactSound();
+        
         // create impact effect if available
         if (impactEffect != null)
         {
@@ -60,8 +94,12 @@ public class Projectile : MonoBehaviour
         {
             if (target) target.TakeDamage(damage);
         }
+        
+       
         Destroy(gameObject);
     }
+
+   
 
     void Explode()
     {
@@ -71,21 +109,55 @@ public class Projectile : MonoBehaviour
             Enemy enemy = col.GetComponent<Enemy>();
             if (enemy)
             {
-                // Optional: calculate damage based on distance
+                // alculate damage based on distance
                 float distance = Vector3.Distance(transform.position, enemy.transform.position);
                 float damagePercent = 1f - Mathf.Clamp01(distance / explosionRadius);
                 enemy.TakeDamage(damage * damagePercent);
             }
         }
     }
-    
-    // Visualize explosion radius in editor
-    void OnDrawGizmosSelected()
+
+    void PlayImpactSound()
     {
-        if (explosionRadius > 0)
+        // Use the SoundManager to play the projectile impact sound
+        if (SoundManager.Instance != null)
         {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, explosionRadius);
+            SoundManager.Instance.PlayProjectileImpactSound(type, transform.position);
         }
+    }
+
+
+    void SetSoundBasedOnType()
+    {
+        // this sets the correct audio based on the path
+        string soundPath = "";
+        switch (type)
+        {
+            case ProjectileType.Arrow:
+                soundPath = "Audio/ArrowSound";
+                break;
+            case ProjectileType.Cannon:
+                soundPath = "Audio/CannonSound";
+                break;
+            case ProjectileType.Turret:
+                soundPath = "Audio/TurretSound";
+                break;
+            case ProjectileType.Catapult:
+                soundPath = "Audio/CatapultSound";
+                break;
+            
+        }
+
+        if (!string.IsNullOrEmpty(soundPath))
+        {
+            impactSound = Resources.Load<AudioClip>(soundPath);
+        }
+    }
+    
+    // method to change the projectile type 
+    public void SetProjectileType(ProjectileType newType)
+    {
+        type = newType;
+        SetSoundBasedOnType();
     }
 }

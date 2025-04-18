@@ -10,10 +10,7 @@ public class MainMenuController : MonoBehaviour
 
     private void Start()
     {
-        // Get reference to sound manager
         soundManager = SoundManager.Instance;
-        
-        // Make sure options panel starts hidden
         if (OptionPanel != null)
         {
             OptionPanel.alpha = 0;

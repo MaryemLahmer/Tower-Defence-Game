@@ -537,6 +537,9 @@ MonoBehaviour:
   damage: 20
   explosionRadius: 10
   impactEffect: {fileID: 0}
+  impactSound: {fileID: 8300000, guid: ca4c218175e038643a61d49b953bfceb, type: 3}
+  soundVolume: 0.5
+  type: 0
   enemyLayer:
     serializedVersion: 2
     m_Bits: 0

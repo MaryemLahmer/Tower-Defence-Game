@@ -33,6 +33,7 @@ public class ProjectileDamage : MonoBehaviour, IDamageMethod
             GameObject projectileObj = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
             projectileObj.SetActive(true);
             Projectile projectile = projectileObj.GetComponent<Projectile>();
+            projectile.SetProjectileType(Projectile.ProjectileType.Arrow); 
             if (projectile)
             {
                 Enemy enemy = target.GetComponent<Enemy>();
