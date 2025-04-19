@@ -122,7 +122,7 @@ public class SoundManager : MonoBehaviour
             // If it's playing on awake or already playing, it might be our problem source
             if (source.playOnAwake || source.isPlaying)
             {
-                // We'll disable it and log a message
+                // disable it and log a message
                 Debug.LogWarning("Found another AudioSource playing on: " + source.gameObject.name + 
                                  ". Disabling it as it might conflict with SoundManager.");
                 source.playOnAwake = false;

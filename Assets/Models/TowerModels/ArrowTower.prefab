@@ -100,9 +100,8 @@ MonoBehaviour:
   speed: 15
   damage: 10
   explosionRadius: 0
-  impactEffect: {fileID: 0}
-  impactSound: {fileID: 8300000, guid: ca4c218175e038643a61d49b953bfceb, type: 3}
-  soundVolume: 0.5
+  impactEffect: {fileID: 4914716930404006884, guid: aed12c224fbc8704d8eaa07a52e88f44, type: 3}
+  impactSound: {fileID: 8300000, guid: 2af69ec48af35f142ae69ccd5b3808ea, type: 3}
   type: 0
   enemyLayer:
     serializedVersion: 2
