@@ -12,6 +12,9 @@ public class SoundManager : MonoBehaviour
     // Audio mixer
     [Header("Audio Mixer")]
     [SerializeField] private AudioMixer audioMixer;
+    [SerializeField] private AudioMixerSnapshot normalSnapshot;
+    [SerializeField] private AudioMixerSnapshot duckingSnapshot;
+    [SerializeField] private float transitionTime = 0.3f;
     
     // Audio sources
     [Header("Audio Sources")]
@@ -54,6 +57,9 @@ public class SoundManager : MonoBehaviour
         _instance = this;
         DontDestroyOnLoad(gameObject);
         
+        // Find and disable any other music players in the scene
+        DisableOtherMusicPlayers();
+        
         // Create audio sources if not assigned
         if (musicSource == null)
         {
@@ -67,21 +73,31 @@ public class SoundManager : MonoBehaviour
         // Setup sources with mixer groups if mixer is assigned
         if (audioMixer != null)
         {
-            AudioMixerGroup[] groups = audioMixer.FindMatchingGroups("Master");
-            if (groups.Length > 0)
+            AudioMixerGroup[] masterGroups = audioMixer.FindMatchingGroups("Master");
+            if (masterGroups.Length > 0)
             {
-                AudioMixerGroup musicGroup = audioMixer.FindMatchingGroups("Music")[0];
-                if (musicGroup != null)
-                    musicSource.outputAudioMixerGroup = musicGroup;
+                AudioMixerGroup[] musicGroups = audioMixer.FindMatchingGroups("Music");
+                if (musicGroups.Length > 0)
+                    musicSource.outputAudioMixerGroup = musicGroups[0];
                 
-                AudioMixerGroup sfxGroup = audioMixer.FindMatchingGroups("SFX")[0];
-                if (sfxGroup != null)
-                    sfxSource.outputAudioMixerGroup = sfxGroup;
+                AudioMixerGroup[] sfxGroups = audioMixer.FindMatchingGroups("SFX");
+                if (sfxGroups.Length > 0)
+                    sfxSource.outputAudioMixerGroup = sfxGroups[0];
             }
+            else
+            {
+                Debug.LogError("Missing Master group in Audio Mixer. Check your Audio Mixer settings.");
+            }
+        }
+        else
+        {
+            Debug.LogError("No Audio Mixer assigned to Sound Manager. Assign an Audio Mixer to enable volume control.");
         }
         
         // Configure sources
         musicSource.loop = true;
+        musicSource.playOnAwake = false;
+        sfxSource.playOnAwake = false;
         
         // Initialize sound library
         InitializeSoundLibrary();
@@ -91,6 +107,36 @@ public class SoundManager : MonoBehaviour
         
         // Listen for scene changes
         SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    
+    private void DisableOtherMusicPlayers()
+    {
+        // Find all audio sources in the scene that are not ours
+        AudioSource[] allSources = FindObjectsOfType<AudioSource>();
+        foreach (AudioSource source in allSources)
+        {
+            // Skip our own source
+            if (source == musicSource || source == sfxSource)
+                continue;
+                
+            // If it's playing on awake or already playing, it might be our problem source
+            if (source.playOnAwake || source.isPlaying)
+            {
+                // We'll disable it and log a message
+                Debug.LogWarning("Found another AudioSource playing on: " + source.gameObject.name + 
+                                 ". Disabling it as it might conflict with SoundManager.");
+                source.playOnAwake = false;
+                source.Stop();
+                
+                // Ensure it uses the audio mixer if it's playing music
+                if (source.clip != null && source.loop)
+                {
+                    AudioMixerGroup[] musicGroups = audioMixer.FindMatchingGroups("Music");
+                    if (musicGroups.Length > 0)
+                        source.outputAudioMixerGroup = musicGroups[0];
+                }
+            }
+        }
     }
     
     private void InitializeSoundLibrary()
@@ -122,6 +168,9 @@ public class SoundManager : MonoBehaviour
             PlayMenuMusic();
         else if (scene.name == "Game" || scene.name == "Main")
             PlayGameMusic();
+            
+        // Find and disable any other music players that might have been loaded with the scene
+        DisableOtherMusicPlayers();
     }
     
     // Music control methods
@@ -141,7 +190,12 @@ public class SoundManager : MonoBehaviour
         {
             musicSource.clip = clip;
             if (!isMusicMuted)
+            {
                 musicSource.Play();
+                // Use normal snapshot when starting music
+                if (normalSnapshot != null)
+                    normalSnapshot.TransitionTo(0.5f);
+            }
         }
     }
     
@@ -161,7 +215,7 @@ public class SoundManager : MonoBehaviour
         PlaySoundEffect("EnemyDefeated");
     }
     
-    // Play projectile impact sounds
+    // Play projectile impact sounds with ducking
     public void PlayProjectileImpactSound(Projectile.ProjectileType type, Vector3 position = default)
     {
         string soundKey = "";
@@ -173,9 +227,13 @@ public class SoundManager : MonoBehaviour
                 break;
             case Projectile.ProjectileType.Cannon:
                 soundKey = "CannonImpact";
+                // For louder sounds like cannon, use ducking
+                ApplyDucking();
                 break;
             case Projectile.ProjectileType.Turret:
                 soundKey = "TurretImpact";
+                // For louder sounds like turret, use ducking
+                ApplyDucking();
                 break;
         }
         
@@ -192,10 +250,31 @@ public class SoundManager : MonoBehaviour
         {
             AudioClip clip = soundLibrary[soundKey];
             
+            // Check if this is an impact sound that should trigger ducking
+            bool shouldDuck = soundKey.Contains("Impact") && 
+                             (soundKey.Contains("Cannon") || soundKey.Contains("Turret"));
+                             
+            if (shouldDuck)
+                ApplyDucking();
+            
             if (position != default)
             {
-                // Play sound at position in 3D space
-                AudioSource.PlayClipAtPoint(clip, position);
+                // For 3D sounds, create a temporary object with audio source
+                GameObject tempAudio = new GameObject("TempAudio");
+                tempAudio.transform.position = position;
+                AudioSource tempSource = tempAudio.AddComponent<AudioSource>();
+                
+                // Set the output group
+                if (audioMixer != null)
+                {
+                    AudioMixerGroup[] sfxGroups = audioMixer.FindMatchingGroups("SFX");
+                    if (sfxGroups.Length > 0)
+                        tempSource.outputAudioMixerGroup = sfxGroups[0];
+                }
+                
+                tempSource.clip = clip;
+                tempSource.Play();
+                Destroy(tempAudio, clip.length + 0.1f);
             }
             else
             {
@@ -203,6 +282,23 @@ public class SoundManager : MonoBehaviour
                 sfxSource.PlayOneShot(clip);
             }
         }
+    }
+    
+    // Apply ducking effect using snapshots
+    private void ApplyDucking()
+    {
+        if (duckingSnapshot != null)
+        {
+            duckingSnapshot.TransitionTo(transitionTime);
+            // Return to normal after a delay
+            Invoke("RestoreNormalVolume", 0.5f);
+        }
+    }
+    
+    private void RestoreNormalVolume()
+    {
+        if (normalSnapshot != null)
+            normalSnapshot.TransitionTo(transitionTime);
     }
     
     // Get a sound clip by key
@@ -243,9 +339,12 @@ public class SoundManager : MonoBehaviour
         float db = isMusicMuted ? MIN_DB : ConvertToDecibel(GetMusicVolume());
         audioMixer.SetFloat("MusicVolume", db);
         
-        // Also handle direct muting of the source as a backup
-        musicSource.mute = isMusicMuted;
-        
+        // Also handle the music source directly
+        if (isMusicMuted)
+            musicSource.Pause();
+        else if (musicSource.clip != null)
+            musicSource.Play();
+            
         SaveSettings();
     }
     
@@ -308,17 +407,23 @@ public class SoundManager : MonoBehaviour
             
             // Apply music volume (accounting for mute)
             if (isMusicMuted)
+            {
                 audioMixer.SetFloat("MusicVolume", MIN_DB);
+                if (musicSource.isPlaying)
+                    musicSource.Pause();
+            }
             else
+            {
                 audioMixer.SetFloat("MusicVolume", musicVolume);
+                if (musicSource.clip != null && !musicSource.isPlaying)
+                    musicSource.Play();
+            }
                 
             // Apply SFX volume (accounting for mute)
             if (isSfxMuted)
                 audioMixer.SetFloat("SFXVolume", MIN_DB);
             else
                 audioMixer.SetFloat("SFXVolume", sfxVolume);
-                
-            musicSource.mute = isMusicMuted;
         }
         else
         {

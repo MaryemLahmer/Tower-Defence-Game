@@ -3263,6 +3263,14 @@ PrefabInstance:
       value: 0.32
       objectReference: {fileID: 0}
     - target: {fileID: 7148495726831555196, guid: 8594b3cd9c78a5e46be783f689fbb4c9, type: 3}
+      propertyPath: normalSnapshot
+      value: 
+      objectReference: {fileID: 24500006, guid: ac9a43ecf65c9f1489b198413eaeb13f, type: 2}
+    - target: {fileID: 7148495726831555196, guid: 8594b3cd9c78a5e46be783f689fbb4c9, type: 3}
+      propertyPath: duckingSnapshot
+      value: 
+      objectReference: {fileID: -1212722112410074721, guid: ac9a43ecf65c9f1489b198413eaeb13f, type: 2}
+    - target: {fileID: 7148495726831555196, guid: 8594b3cd9c78a5e46be783f689fbb4c9, type: 3}
       propertyPath: arrowImpactSound
       value: 
       objectReference: {fileID: 8300000, guid: 2af69ec48af35f142ae69ccd5b3808ea, type: 3}
