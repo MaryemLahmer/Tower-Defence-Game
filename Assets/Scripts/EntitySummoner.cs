@@ -10,13 +10,16 @@ public class EntitySummoner : MonoBehaviour
 
     public static bool isInialized;
 
+    public static event System.Action<Enemy> OnEnemySpawned;
+    private static Dictionary<int, EnemySummonData> enemyDataCache = new Dictionary<int, EnemySummonData>();
     public static void Init()
     {
         if (!isInialized)
-        {
+        {   
             enemyPrefabs = new Dictionary<int, GameObject>();
             enemyobjectPools = new Dictionary<int, Queue<Enemy>>();
             enemiesAlive = new List<Enemy>();
+            enemyDataCache = new Dictionary<int, EnemySummonData>();
         
             EnemySummonData[] enemies = Resources.LoadAll<EnemySummonData>("Enemies");
         
@@ -24,6 +27,7 @@ public class EntitySummoner : MonoBehaviour
             {
                 enemyPrefabs.Add(enemy.enemyId, enemy.enemeyPrefab);
                 enemyobjectPools.Add(enemy.enemyId, new Queue<Enemy>());
+                enemyDataCache.Add(enemy.enemyId, enemy);
                 Debug.Log($"Registered enemy ID {enemy.enemyId}");
 
             }
@@ -33,6 +37,17 @@ public class EntitySummoner : MonoBehaviour
         Debug.Log("EntitySummoner initialized.");
 
     }
+
+    public static EnemySummonData GetEnemyData(int enemyId)
+{
+    if (enemyDataCache.ContainsKey(enemyId))
+    {
+        return enemyDataCache[enemyId];
+    }
+    
+    Debug.LogWarning($"Enemy data for ID {enemyId} not found in cache");
+    return null;
+}
 
     public static Enemy SummonEnemy(int enemyID)
     {   
@@ -45,6 +60,7 @@ public class EntitySummoner : MonoBehaviour
             {
                 // dequeue enemy and initialize
                 summonedEnemy = referencedQueue.Dequeue();
+                summonedEnemy.id = enemyID;
                 summonedEnemy.Init();
             }
             else
@@ -52,8 +68,14 @@ public class EntitySummoner : MonoBehaviour
                 // instantiate new enemy and initialize
                 GameObject newEnemy = Instantiate(enemyPrefabs[enemyID], new Vector3(0, 0.2f, 5f), enemyPrefabs[enemyID].transform.rotation);
                 summonedEnemy = newEnemy.GetComponent<Enemy>();
+                summonedEnemy.id = enemyID;
                 summonedEnemy.Init();
             }
+        // Add to alive enemies list
+        enemiesAlive.Add(summonedEnemy);
+        // Fire event
+        OnEnemySpawned?.Invoke(summonedEnemy);
+        return summonedEnemy;
         }
         else
         {
@@ -62,13 +84,24 @@ public class EntitySummoner : MonoBehaviour
         }
         
        
-        enemiesAlive.Add(summonedEnemy);
+    /*   enemiesAlive.Add(summonedEnemy);
         summonedEnemy.id = enemyID;
-        return summonedEnemy;
+        if (summonedEnemy != null)
+    {
+        OnEnemySpawned?.Invoke(summonedEnemy);
+    }
+        return summonedEnemy; */
     }
 
     public static void RemoveEnemey(Enemy enemyToRemove)
-    {
+    {   
+        int enemyId = enemyToRemove.id;
+        if (!enemyobjectPools.ContainsKey(enemyId))
+        {
+            Debug.LogError($"Trying to remove enemy with ID {enemyId} but no pool exists");
+            Destroy(enemyToRemove.gameObject);
+            return;
+        }
         enemyobjectPools[enemyToRemove.id].Enqueue(enemyToRemove);
         enemyToRemove.gameObject.SetActive(false);
         enemiesAlive.Remove(enemyToRemove);

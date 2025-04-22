@@ -6,6 +6,7 @@ TagManager:
   tags:
   - cantplace
   - VirginCell
+  - UsedCell
   layers:
   - Default
   - TransparentFX

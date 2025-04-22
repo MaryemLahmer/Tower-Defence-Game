@@ -6,26 +6,30 @@ using UnityEngine;
 public class EnemyWaveData
 {
     public int enemyID;
-    public int baseCount;    // Base number of this enemy type
-    public float spawnDelay; // Delay between spawns of this type
-    public int additionalPerWave; // How many more to add each wave
+    public int baseCount;
+    public float spawnDelay;
+    public int additionalPerWave;
     [Range(0, 1)]
-    public float spawnChance = 1f; // Chance to spawn (for rare enemies)
+    public float spawnChance = 1f;
 }
 
 public class EnemyWaveSpawner : MonoBehaviour
-{
+{   
+    [Header("Path Settings")]
+    private List<Vector2Int> pathCells = new List<Vector2Int>();
+    private bool pathIsReady = false;
+
     [Header("Enemy Configuration")]
     [SerializeField] private EnemyWaveData[] enemyTypes;
     
     [Header("Wave Settings")]
-    [SerializeField] private int baseEnemyCount = 10;         // Starting number of enemies in wave 1
-    [SerializeField] private int additionalEnemiesPerWave = 3; // Additional enemies per wave
-    [SerializeField] private float spawnDelayReductionPerWave = 0.05f; // Speeds up spawning each wave
+    [SerializeField] private int baseEnemyCount = 10;
+    [SerializeField] private int additionalEnemiesPerWave = 3;
+    [SerializeField] private float spawnDelayReductionPerWave = 0.05f;
     
     [Header("Spawn Settings")]
-    [SerializeField] private float initialSpawnDelay = 1f;  // Wait before first enemy
-    [SerializeField] private float minSpawnDelay = 0.2f;    // Minimum delay between enemies
+    [SerializeField] private float initialSpawnDelay = 1f;
+    [SerializeField] private float minSpawnDelay = 0.2f;
     
     // Runtime variables
     private int currentWave = 0;
@@ -52,9 +56,32 @@ public class EnemyWaveSpawner : MonoBehaviour
         }
     }
     
+    // This method will be called by GridManager to set the path
+    public void SetPathCells(List<Vector2Int> path)
+    {
+        if (path != null && path.Count >= 2)
+        {
+            pathCells = new List<Vector2Int>(path);
+            pathIsReady = true;
+            Debug.Log($"Path set with {pathCells.Count} cells. Starting at ({pathCells[0].x}, {pathCells[0].y}) and ending at ({pathCells[pathCells.Count-1].x}, {pathCells[pathCells.Count-1].y})");
+        }
+        else
+        {
+            Debug.LogError("Invalid path provided to EnemyWaveSpawner!");
+        }
+    }
+    
     public void StartWaveSpawning()
     {   
         Debug.Log("StartWaveSpawning called.");
+        
+        // Safety check to make sure path is ready before spawning enemies
+        if (!pathIsReady)
+        {
+            Debug.LogError("Cannot spawn enemies - path not set yet! Enemies will be spawned once path is ready.");
+            return;
+        }
+        
         currentWave++;
         StopAllCoroutines();
         StartCoroutine(SpawnWave());
@@ -62,12 +89,34 @@ public class EnemyWaveSpawner : MonoBehaviour
     
     private void OnWaveCompleted(int waveNumber)
     {
-        // Wave completed - could add rewards here
         Debug.Log($"Wave {waveNumber} completed! Increasing difficulty for next wave.");
+    }
+    
+    // Assign path to a spawned enemy
+    private void AssignPathToEnemy(Enemy spawnedEnemy)
+    {
+        if (spawnedEnemy != null && pathIsReady)
+        {
+            spawnedEnemy.SetPath(pathCells);
+        }
+        else if (spawnedEnemy != null)
+        {
+            Debug.LogError("Trying to assign path to enemy but path is not ready!");
+            
+            // Safety measure: destroy the enemy to prevent game freeze
+            Destroy(spawnedEnemy.gameObject);
+        }
     }
     
     private IEnumerator SpawnWave()
     {
+        // Safety check - don't spawn if path isn't ready
+        if (!pathIsReady)
+        {
+            Debug.LogError("Cannot spawn wave - path not set!");
+            yield break;
+        }
+        
         // Wait before starting spawns
         yield return new WaitForSeconds(initialSpawnDelay);
         
@@ -118,7 +167,10 @@ public class EnemyWaveSpawner : MonoBehaviour
                         // Spawn the enemy
                         Enemy spawnedEnemy = EntitySummoner.SummonEnemy(enemyID);
                         if (spawnedEnemy != null)
-                        {
+                        {   
+                            // IMPORTANT: Assign path to enemy for movement
+                            AssignPathToEnemy(spawnedEnemy);
+                            
                             // Decrease remaining count for this type
                             enemyCounts[enemyID]--;
                             enemiesRemaining--;
@@ -159,51 +211,9 @@ public class EnemyWaveSpawner : MonoBehaviour
         }
         
         Debug.Log($"All enemies for wave {currentWave} have been spawned!");
-        
-        // Here we could notify a manager that all enemies are spawned
-        // But we still need to wait for enemies to be cleared before the wave is truly complete
     }
     
-    private int CalculateTotalEnemies()
-    {
-        // Base count + additional per wave
-        int totalForWave = baseEnemyCount + (currentWave - 1) * additionalEnemiesPerWave;
-        
-        // Add specific enemy counts
-        foreach (EnemyWaveData enemyData in enemyTypes)
-        {
-            totalForWave += CalculateEnemyCount(enemyData);
-        }
-        
-        return totalForWave;
-    }
-    
-    private int CalculateEnemyCount(EnemyWaveData enemyData)
-    {
-        // Base count for this enemy type
-        int count = enemyData.baseCount;
-        
-        // Add additional enemies based on wave number
-        count += (currentWave - 1) * enemyData.additionalPerWave;
-        
-        // Some enemy types might not appear until later waves
-        if (enemyData.enemyID > 1 && currentWave < enemyData.enemyID)
-        {
-            count = 0; // Don't spawn advanced enemies in early waves
-        }
-        
-        return count;
-    }
-    
-    private EnemyWaveData GetEnemyDataByID(int enemyID)
-    {
-        foreach (EnemyWaveData data in enemyTypes)
-        {
-            if (data.enemyID == enemyID)
-                return data;
-        }
-        return null;
-    }
+    // Rest of your methods (CalculateTotalEnemies, CalculateEnemyCount, etc.) remain the same
     
     // Public method to check if all enemies have been cleared (for wave completion)
     public bool AreAllEnemiesCleared()
@@ -214,10 +224,107 @@ public class EnemyWaveSpawner : MonoBehaviour
     // Call this to manually spawn a test enemy
     public void SpawnTestEnemy(int enemyID)
     {
+        // Safety check - don't spawn test enemy if path isn't ready
+        if (!pathIsReady)
+        {
+            Debug.LogError("Cannot spawn test enemy - path not set yet!");
+            return;
+        }
+        
         Enemy enemy = EntitySummoner.SummonEnemy(enemyID);
         if (enemy != null)
         {
-            Debug.Log($"Test enemy {enemyID} spawned!");
+            // Assign path to test enemy
+            AssignPathToEnemy(enemy);
+            Debug.Log($"Test enemy {enemyID} spawned and path assigned!");
+        }
+    }
+    private int CalculateTotalEnemies()
+{
+    int totalForWave = 0;
+    
+    // Calculate based on enemy types
+    foreach (EnemyWaveData enemyData in enemyTypes)
+    {
+        int countForThisType = CalculateEnemyCount(enemyData);
+        totalForWave += countForThisType;
+    }
+    
+    // Add base enemies (optional - remove if you only want to use enemy types)
+    int baseEnemiesForWave = baseEnemyCount + (currentWave - 1) * additionalEnemiesPerWave;
+    totalForWave += baseEnemiesForWave;
+    
+    return totalForWave;
+}
+private int CalculateEnemyCount(EnemyWaveData enemyData)
+{
+    // Base count for this enemy type
+    int count = enemyData.baseCount;
+    
+    // Add additional enemies based on wave number
+    count += (currentWave - 1) * enemyData.additionalPerWave;
+    
+    // Some enemy types might not appear until later waves (optional)
+    if (enemyData.enemyID > 1 && currentWave < enemyData.enemyID)
+    {
+        count = 0; // Don't spawn advanced enemies in early waves
+    }
+    
+    return count;
+}
+    private EnemyWaveData GetEnemyDataByID(int enemyID)
+{
+    if (enemyTypes == null)
+    {
+        Debug.LogError("No enemy types defined!");
+        return null;
+    }
+    
+    foreach (EnemyWaveData data in enemyTypes)
+    {
+        if (data.enemyID == enemyID)
+            return data;
+    }
+    
+    Debug.LogWarning($"No enemy data found for ID: {enemyID}");
+    return null;
+}
+    // Visualize the path in the editor - simplified for runtime-generated paths
+    private void OnDrawGizmos()
+    {
+        if (pathCells != null && pathCells.Count > 1 && pathIsReady)
+        {
+            // Draw path points
+            for (int i = 0; i < pathCells.Count; i++)
+            {
+                // Start point (green)
+                if (i == 0)
+                {
+                    Gizmos.color = Color.green;
+                    Gizmos.DrawSphere(new Vector3(pathCells[i].x, 0.2f, pathCells[i].y), 0.3f);
+                }
+                // End point (red)
+                else if (i == pathCells.Count - 1)
+                {
+                    Gizmos.color = Color.red;
+                    Gizmos.DrawSphere(new Vector3(pathCells[i].x, 0.2f, pathCells[i].y), 0.3f);
+                }
+                // Waypoints (yellow)
+                else
+                {
+                    Gizmos.color = Color.yellow;
+                    Gizmos.DrawSphere(new Vector3(pathCells[i].x, 0.2f, pathCells[i].y), 0.2f);
+                }
+                
+                // Draw path lines
+                if (i < pathCells.Count - 1)
+                {
+                    Gizmos.color = Color.yellow;
+                    Vector3 start = new Vector3(pathCells[i].x, 0.2f, pathCells[i].y);
+                    Vector3 end = new Vector3(pathCells[i+1].x, 0.2f, pathCells[i+1].y);
+                    Gizmos.DrawLine(start, end);
+                }
+            }
         }
     }
 }

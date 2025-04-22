@@ -630,71 +630,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 212682548}
   m_CullTransparentMesh: 1
---- !u!1 &265046164
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 265046166}
-  - component: {fileID: 265046165}
-  m_Layer: 0
-  m_Name: EnemyWaveSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &265046165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 265046164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f81cc3bd207343443a7c0ef1b9336786, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyTypes:
-  - enemyID: 1
-    baseCount: 5
-    spawnDelay: 1
-    additionalPerWave: 3
-    spawnChance: 1
-  - enemyID: 2
-    baseCount: 2
-    spawnDelay: 2
-    additionalPerWave: 1
-    spawnChance: 1
-  - enemyID: 3
-    baseCount: 0
-    spawnDelay: 2
-    additionalPerWave: 1
-    spawnChance: 0.8
-  baseEnemyCount: 6
-  additionalEnemiesPerWave: 3
-  spawnDelayReductionPerWave: 0.05
-  initialSpawnDelay: 1
-  minSpawnDelay: 0.2
---- !u!4 &265046166
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 265046164}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 413.87427, y: 272.87912, z: 188.94809}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &302682369
 GameObject:
   m_ObjectHideFlags: 0
@@ -1620,8 +1555,7 @@ GameObject:
   - component: {fileID: 693872038}
   - component: {fileID: 693872037}
   - component: {fileID: 693872039}
-  - component: {fileID: 693872040}
-  - component: {fileID: 693872041}
+  - component: {fileID: 693872042}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1705,19 +1639,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 55
   playerCamera: {fileID: 1741037748}
---- !u!114 &693872040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 693872036}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0da55a389cfa0cd4992606816224cac5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &693872041
+  towerPrefabs:
+  - {fileID: 3793147321027664187, guid: 99fdd7b8d7cdd5b4b933816bc447f435, type: 3}
+  - {fileID: 1495742883894667982, guid: 951eb398c50bd604f93b10096021ced5, type: 3}
+  - {fileID: 5931691036288507535, guid: 13845911b5eb9a7459578b79761264a6, type: 3}
+  - {fileID: 514070166564619910, guid: df1a1b1a15fa8274e9dafb930b3ac805, type: 3}
+  towerCosts: 6400000096000000c8000000fa000000
+  validPlacementColor: {r: 0.5, g: 1, b: 0.5, a: 0.7}
+  invalidPlacementColor: {r: 1, g: 0.5, b: 0.5, a: 0.7}
+--- !u!114 &693872042
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1726,10 +1656,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 693872036}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39ff50a929862a94692e8b5faae288e9, type: 3}
+  m_Script: {fileID: 11500000, guid: f81cc3bd207343443a7c0ef1b9336786, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loopShouldEnd: 0
+  enemyTypes:
+  - enemyID: 1
+    baseCount: 5
+    spawnDelay: 0.5
+    additionalPerWave: 3
+    spawnChance: 1
+  - enemyID: 2
+    baseCount: 2
+    spawnDelay: 1
+    additionalPerWave: 2
+    spawnChance: 0.5
+  - enemyID: 3
+    baseCount: 0
+    spawnDelay: 1.5
+    additionalPerWave: 1
+    spawnChance: 0.5
+  baseEnemyCount: 5
+  additionalEnemiesPerWave: 3
+  spawnDelayReductionPerWave: 0.05
+  initialSpawnDelay: 1
+  minSpawnDelay: 0.2
 --- !u!1 &787851554
 GameObject:
   m_ObjectHideFlags: 0
@@ -3439,6 +3389,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1479749360}
   m_CullTransparentMesh: 1
+--- !u!1 &1592091501
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1592091502}
+  - component: {fileID: 1592091503}
+  m_Layer: 0
+  m_Name: EconomyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1592091502
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592091501}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 413.87427, y: 272.87912, z: 188.94809}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1592091503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592091501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d3374e44ff0a4e4389dd0c2a9195d89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingMoney: 100
+  startingMultiplier: 1
+  maxMultiplier: 10
+  minMultiplier: -10
+  killsForMultiplierIncrease: 1
+  leaksForMultiplierDecrease: 1
+  uiManager: {fileID: 302682370}
 --- !u!1 &1648974649
 GameObject:
   m_ObjectHideFlags: 0
@@ -4700,4 +4701,4 @@ SceneRoots:
   - {fileID: 79973340}
   - {fileID: 392650195}
   - {fileID: 1341507897}
-  - {fileID: 265046166}
+  - {fileID: 1592091502}

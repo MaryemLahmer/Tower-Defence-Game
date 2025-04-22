@@ -7,7 +7,7 @@ public class GridManager : MonoBehaviour
     public int gridWidth = 16;
     public int gridHeight = 8;
     public int minPathLength = 30;
-    private EnemyWaveManager waveManager;
+    private EnemyWaveSpawner waveSpawner;
     public GridCellObject[] gridCells;
     public GridCellObject[] sceneryCells;
     private PathGenerator _pathGenerator;
@@ -15,7 +15,13 @@ public class GridManager : MonoBehaviour
     void Start()
     {
         _pathGenerator = new PathGenerator(gridWidth, gridHeight);
-        waveManager = GetComponent<EnemyWaveManager>();
+        waveSpawner = GetComponent<EnemyWaveSpawner>();
+        if (waveSpawner == null)
+    {
+        waveSpawner = FindObjectOfType<EnemyWaveSpawner>();
+        if (waveSpawner == null)
+            Debug.LogError("No EnemyWaveSpawner found!");
+    }
         List<Vector2Int> pathCells = _pathGenerator.GenerateEasyPath();
         int pathSize = pathCells.Count;
 
@@ -41,7 +47,7 @@ public class GridManager : MonoBehaviour
     {
         yield return LayPathCells(pathCells);
         yield return LaySceneryCells();
-        waveManager.SetPathCells(_pathGenerator.GenerateRoute());
+        waveSpawner.SetPathCells(_pathGenerator.GenerateRoute());
     }
 
     private IEnumerator LayPathCells(List<Vector2Int> pathCells)

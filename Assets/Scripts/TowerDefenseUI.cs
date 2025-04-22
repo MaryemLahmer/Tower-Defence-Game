@@ -13,12 +13,14 @@ public class TowerDefenseUI : MonoBehaviour
     [SerializeField] public TextMeshProUGUI waveNumberText;
     [SerializeField] public TextMeshProUGUI enemiesRemainingText;
     
+
     [Header("Phase Information")]
     [SerializeField] private TextMeshProUGUI phaseText;
     [SerializeField] private TextMeshProUGUI timerText;
     
     [Header("Tower Selection")]
     [SerializeField] private GameObject towerSelectionPanel;
+    private TourPlacement towerPlacer;
     [SerializeField] private GameObject[] towerButtons;
     
     // Start is called with placeholder values
@@ -29,11 +31,29 @@ public class TowerDefenseUI : MonoBehaviour
         UpdateMultiplier(1);
         UpdateMoney(100);
         UpdateWaveNumber(1);
-        UpdateEnemiesRemaining(20);
+        UpdateEnemiesRemaining(0);
         UpdatePhaseStatus("PLACEMENT PHASE");
         UpdatePhaseTimer(5);
+        // Find the tower placer
+        towerPlacer = FindObjectOfType<TourPlacement>();
+        if (towerPlacer == null)
+            Debug.LogError("TourPlacement component not found in scene!");
+    
     }
     
+    private void SetupTowerButtons()
+{
+    for (int i = 0; i < towerButtons.Length; i++)
+    {
+        int index = i; // Capture for lambda
+        Button button = towerButtons[i].GetComponent<Button>();
+        
+        if (button != null)
+        {
+            button.onClick.AddListener(() => SelectTower(index));
+        }
+    }
+}
     // Public methods to update UI values
     public void UpdateScore(int score)
     {
@@ -110,16 +130,18 @@ public class TowerDefenseUI : MonoBehaviour
     
     // Select a tower for placement
     public void SelectTower(int towerIndex)
+{
+    // Highlight selected tower button
+    for (int i = 0; i < towerButtons.Length; i++)
     {
-        // Highlight the selected tower button
-        for (int i = 0; i < towerButtons.Length; i++)
-        {
-            // Add visual feedback for selected tower
-            Image buttonImage = towerButtons[i].GetComponent<Image>();
-            buttonImage.color = (i == towerIndex) ? new Color(1f, 0.8f, 0.2f) : Color.white;
-        }
-        
-        // In a full implementation, this would notify a tower placement system
-        Debug.Log("Selected tower " + towerIndex);
+        Image buttonImg = towerButtons[i].GetComponent<Image>();
+        buttonImg.color = (i == towerIndex) ? new Color(1f, 0.8f, 0.2f) : Color.white;
     }
+    
+    // Tell the tower placer to create a preview
+    if (towerPlacer != null)
+    {
+        towerPlacer.SetTowerToPlacement(towerIndex);
+    }
+}
 }
