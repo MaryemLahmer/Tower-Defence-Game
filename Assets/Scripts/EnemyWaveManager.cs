@@ -5,7 +5,6 @@ using UnityEngine;
 public class EnemyWaveManager : MonoBehaviour
 {
     private List<Vector2Int> pathCells;
-    public float baseEnemeySpeed = 2.0f;
     private GameObject enemyInstance;
     int nextPathCellIndex;
     bool enemyRunCompleted;
@@ -17,7 +16,7 @@ public class EnemyWaveManager : MonoBehaviour
        enemyRunCompleted = false;
     }
 
-    public void MoveEnemy(Enemy summonedEnemy)
+   /* public void MoveEnemy(Enemy summonedEnemy)
     {
         while (pathCells != null && pathCells.Count > 1 && !enemyRunCompleted)
         {
@@ -37,11 +36,6 @@ public class EnemyWaveManager : MonoBehaviour
     public void SetPathCells(List<Vector2Int> pathCells)
     {
         this.pathCells = pathCells;
-    }
-
-    public List<Vector2Int> GetPathCells()
-    {
-        return pathCells;
-    }
+    } */
    
 }

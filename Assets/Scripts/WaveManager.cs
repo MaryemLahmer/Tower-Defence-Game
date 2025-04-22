@@ -156,18 +156,18 @@ public class WaveManager : MonoBehaviour
         // Set state
         isPlacementPhase = false;
         currentPhaseTimeRemaining = wavePhaseDuration;
-        
+
         // Disable tower placement
-        if (towerSelectionPanel != null)
-        {
-            towerSelectionPanel.SetActive(false);
-        }
-        
+        /* if (towerSelectionPanel != null)
+         {
+             towerSelectionPanel.SetActive(false);
+         }
+         */
         // Update UI
         if (uiManager != null)
         {
             uiManager.UpdatePhaseStatus("DEFENSE PHASE");
-            uiManager.ToggleTowerSelectionPanel(false);
+           // uiManager.ToggleTowerSelectionPanel(false);
         }
         
         // Notify listeners
