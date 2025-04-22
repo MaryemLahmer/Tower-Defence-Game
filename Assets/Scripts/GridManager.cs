@@ -39,6 +39,8 @@ public class GridManager : MonoBehaviour
         }
         
 
+        // set the path in the wave manager
+        waveSpawner.SetPathCells(pathCells);
         StartCoroutine(LayGrid(pathCells));
     }
 
@@ -58,8 +60,10 @@ public class GridManager : MonoBehaviour
             GameObject pathTile = gridCells[neighbourValue].cellPrefab;
             GameObject pathtileCell =
                 Instantiate(pathTile, new Vector3(pathCell.x, 0f, pathCell.y), Quaternion.identity);
+           // pathtileCell.transform.localScale = new Vector3(2f, 1, 2f);
+
             pathtileCell.transform.Rotate(0f, gridCells[neighbourValue].yRotation, 0f, Space.Self);
-            yield return new WaitForSeconds(0.02f);
+            yield return new WaitForSeconds(0f);
         }
 
         yield return null;
@@ -76,6 +80,8 @@ public class GridManager : MonoBehaviour
                     int randomIndex = Random.Range(0, sceneryCells.Length);
                     GameObject sceneryCell = Instantiate(sceneryCells[randomIndex].cellPrefab, new Vector3(x, 0f, y),
                         Quaternion.identity);
+                   // sceneryCell.transform.localScale = new Vector3(2f, 1, 2f);
+
                     if (sceneryCells[randomIndex].isVirginCell) 
                     {
                         sceneryCell.tag = "VirginCell";  
@@ -86,7 +92,7 @@ public class GridManager : MonoBehaviour
                     {
                     }
 
-                    yield return new WaitForSeconds(0.01f);
+                    yield return new WaitForSeconds(0f);
                 }
             }
         }

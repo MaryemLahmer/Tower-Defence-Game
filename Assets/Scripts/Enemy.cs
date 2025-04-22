@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
 
     [Header("Path Following")]
     private List<Vector2Int> pathCells;
-    private int currentPathIndex = 0;
+    public int currentPathIndex = 0;
     private bool pathCompleted = false;
     
     [Header("Visual Feedback")]

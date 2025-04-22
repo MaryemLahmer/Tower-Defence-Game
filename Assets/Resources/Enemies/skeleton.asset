@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bae626e246f90b41a73d82434df3b00, type: 3}
+  m_Name: skeleton
+  m_EditorClassIdentifier: 
+  enemeyPrefab: {fileID: 5694362300255529554, guid: de165cd0d9fd04d43ba460b649d86f3a, type: 3}
+  enemyId: 5
+  health: 0
+  score: 0
+  speed: 0
+  reward: 0

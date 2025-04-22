@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 145880258264439305}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SkeletonKnight_Dec4_2016_0001:transform100
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 804837377428377671}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: joint1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4404493378214664680}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: joint2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7251503469772806488}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: joint4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2944522656049291289}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SkeletonKnight_Dec4_2016_0001:polySurface94
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,7 +169,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5099495479295260352}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: joint7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +203,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3599134596231324426}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SkeletonKnight_Dec4_2016_0001:pCube34
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -234,7 +234,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1635538970400148914}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: joint13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,7 +266,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4242462145826344415}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SkeletonKnight_Dec4_2016_0001:polySurface122
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -297,7 +297,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4437530202818189948}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: joint6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,7 +329,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3982234479401559613}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: joint22
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -361,7 +361,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1181503513573984842}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SkeletonKnight_Dec4_2016_0001:pCube39
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -393,7 +393,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3853764524337038656}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: joint18
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -425,7 +425,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2674793219684210020}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: joint15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -457,7 +457,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 744638225282210521}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: joint24
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -489,7 +489,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 330728860850727774}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: joint10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -521,7 +521,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7828326493397093047}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: joint17
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -553,7 +553,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4118787291501054131}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: joint12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -585,7 +585,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6279906639086701069}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SkeletonKnight_Dec4_2016_0001:nurbsCircle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -616,7 +616,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5876027857553398256}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SkeletonKnight_Dec4_2016_0001:transform55
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -647,7 +647,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7656565189164767643}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SkeletonKnight_Dec4_2016_0001:polySurface95
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -680,7 +680,7 @@ GameObject:
   - component: {fileID: 8320142744163658979}
   - component: {fileID: 4313017655112879526}
   - component: {fileID: 8173159910978339672}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sibat_Dec5_2016:pCylinder7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -761,7 +761,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2980828670529579001}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: joint23
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -793,7 +793,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1058834257963318386}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: joint5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -824,7 +824,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 621193763185013607}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SkeletonKnight_Dec4_2016_0001:pCube33
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -855,7 +855,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8058033137765161406}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: joint20
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -887,7 +887,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 993810794064685872}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SkeletonKnight_Dec4_2016_0001:pCube32
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -918,7 +918,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7456634986530546491}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: joint21
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -949,7 +949,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4983890393093383880}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: joint11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -981,7 +981,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8109081270572275049}
   - component: {fileID: 6120996615218522264}
-  m_Layer: 0
+  - component: {fileID: 6891484025193990108}
+  m_Layer: 7
   m_Name: Skeleton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -996,8 +997,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5694362300255529554}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 219.5, y: -114, z: -1085.8464}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1005,7 +1006,7 @@ Transform:
   - {fileID: 3204835230185282790}
   - {fileID: 2527557760557064337}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &6120996615218522264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1020,9 +1021,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 50
   health: 50
-  speed: 3
+  speed: 1
   id: 1
-  enemyObject: {fileID: 0}
+  currentPathIndex: 0
+  damageEffect: {fileID: 0}
+--- !u!65 &6891484025193990108
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5694362300255529554}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.3645831, y: 0.45370385, z: 0.06913264}
+  m_Center: {x: -0.031313658, y: 0.23895799, z: 0.066687055}
 --- !u!1 &5745356117340406197
 GameObject:
   m_ObjectHideFlags: 0
@@ -1032,7 +1055,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5900453571038670944}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: joint8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1064,7 +1087,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8573642284847341345}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: joint19
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1096,7 +1119,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2595175836124898264}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: group1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1128,7 +1151,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5023702072235773005}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: joint9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1163,7 +1186,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3204835230185282790}
   - component: {fileID: 8588987455528466089}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: polySurface124
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1271,7 +1294,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1649331278149507170}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SkeletonKnight_Dec4_2016_0001:polySurface95
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1302,7 +1325,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3579308806838704481}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: joint3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1334,7 +1357,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5148530928977521297}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: joint26
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1365,7 +1388,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4926310626190467570}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SkeletonKnight_Dec4_2016_0001:transform54
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1396,7 +1419,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8358552367670632163}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: joint25
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1429,7 +1452,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2929107202595882677}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SkeletonKnight_Dec4_2016_0001:polySurface122
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1460,7 +1483,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3695793876129932874}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: joint16
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1491,7 +1514,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8696017191195171061}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: joint14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1523,7 +1546,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2125681452360431378}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SkeletonKnight_Dec4_2016_0001:pCube38
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1555,7 +1578,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2527557760557064337}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SkeletonKnight_Dec4_2016_0001:_UNKNOWN_REF_NODE_fosterParent1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

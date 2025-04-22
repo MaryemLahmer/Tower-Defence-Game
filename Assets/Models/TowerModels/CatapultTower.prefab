@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 680951711470068313}
   - component: {fileID: 4529744278734319100}
   - component: {fileID: 1817225702248929590}
+  - component: {fileID: 6931121801920107644}
+  - component: {fileID: 1258272629012162202}
   m_Layer: 0
   m_Name: weapon-ammo-boulder
   m_TagString: Untagged
@@ -83,6 +85,49 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &6931121801920107644
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160134341776537827}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.16
+  m_Height: 0.24
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1258272629012162202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160134341776537827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a29c348eff554c54e8b66db367ff692f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  splashRadius: 3
+  maxHeight: 5
+  speed: 10
+  impactEffect: {fileID: 0}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &1495742883894667982
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,6 +137,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2482934338557499738}
+  - component: {fileID: -7713784078621387945}
+  - component: {fileID: 6572566929689310795}
   m_Layer: 0
   m_Name: CatapultTower
   m_TagString: Untagged
@@ -117,6 +164,47 @@ Transform:
   - {fileID: 7853923288942701937}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-7713784078621387945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495742883894667982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a02281c2dfeb1c44a7aca93c4ed5cdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemiesLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  damage: 5
+  fireRate: 5
+  range: 5
+  towerPivot: {fileID: 7853923288942701937}
+  target: {fileID: 0}
+  firePoint: {fileID: 6409558523728827911}
+  targetingMethod: 3
+  showRangeVisually: 1
+--- !u!114 &6572566929689310795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495742883894667982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90116331627a9574c96ae8f403376737, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boulderPrefab: {fileID: 160134341776537827}
+  firePoint: {fileID: 6409558523728827911}
+  maxArcHeight: 5
+  predictTargetMovement: 1
+  catapultArm: {fileID: 3363494002267321239}
+  armRotationSpeed: 4
 --- !u!1 &1973144408464509656
 GameObject:
   m_ObjectHideFlags: 0
