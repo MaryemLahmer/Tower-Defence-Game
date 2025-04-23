@@ -198,21 +198,30 @@ public void InitWithData(EnemySummonData data)
     
     // Take damage and check if health <= 0
     public void TakeDamage(float damageAmount)
+{
+    // Check if already dead or inactive
+    if (health <= 0 || !gameObject.activeInHierarchy)
     {
-        health -= damageAmount;
-        
-        // Update health bar
-        UpdateHealthBar();
-        
-        // Visual feedback (optional)
-        StartCoroutine(FlashDamage());
-        
-        // Check if enemy is defeated
-        if (health <= 0)
-        {
-            Die();
-        }
+        return; // Don't apply damage to dead/inactive enemies
     }
+
+    health -= damageAmount;
+    
+    // Update health bar
+    UpdateHealthBar();
+    
+    // Visual feedback (only if active)
+    if (gameObject.activeInHierarchy)
+    {
+        StartCoroutine(FlashDamage());
+    }
+    
+    // Check if enemy is defeated
+    if (health <= 0)
+    {
+        Die();
+    }
+}
     
     void Die()
     {

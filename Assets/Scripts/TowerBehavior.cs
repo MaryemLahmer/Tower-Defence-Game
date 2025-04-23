@@ -13,7 +13,8 @@ public class TowerBehavior : MonoBehaviour
     public Enemy target;
     public Transform firePoint; // Add this
 
-    [Header("Targeting")] public TowerTargeting.TargetType targetingMethod = TowerTargeting.TargetType.First;
+    [Header("Targeting")] 
+    public TowerTargeting.TargetType targetingMethod = TowerTargeting.TargetType.First;
     public bool showRangeVisually = true;
 
     // Damage method component
@@ -30,6 +31,7 @@ public class TowerBehavior : MonoBehaviour
         if (damageMethod != null)
         {
             damageMethod.Init(damage, fireRate);
+            Debug.Log($"Tower initialized with {damageMethod.GetType().Name} damage method");
         }
         else
         {
@@ -37,6 +39,11 @@ public class TowerBehavior : MonoBehaviour
         }
     }
 
+    // Add this Update method to call Tick every frame
+    void Update()
+    {
+        Tick();
+    }
 
     public void Tick()
     {
@@ -62,6 +69,16 @@ public class TowerBehavior : MonoBehaviour
             {
                 damageMethod.DamageTick(target.gameObject);
             }
+        }
+    }
+    
+    // Visualize range in Scene view
+    void OnDrawGizmosSelected()
+    {
+        if (showRangeVisually)
+        {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireSphere(transform.position, range);
         }
     }
 }
