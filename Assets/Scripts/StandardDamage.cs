@@ -4,7 +4,6 @@ using UnityEngine;
 
 public interface IDamageMethod
 {
-    // public void DamageTick(Enemy target);
     public void DamageTick(GameObject target); 
     public void Init(float damage, float fireRat);
 }

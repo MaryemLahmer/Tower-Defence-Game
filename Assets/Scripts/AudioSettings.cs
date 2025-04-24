@@ -9,32 +9,73 @@ public class AudioSettings : MonoBehaviour
     [SerializeField] private Slider musicVolumeSlider;
     [SerializeField] private Slider sfxVolumeSlider;
     
-   /* [Header("Mute Toggles")]
-    [SerializeField] private Toggle musicMuteToggle;
-    [SerializeField] private Toggle sfxMuteToggle;
-    */
-    [Header("Volume Text (Optional)")]
+    [Header("Mute Buttons")]
+    [SerializeField] private Button musicMuteButton;
+    [SerializeField] private Button sfxMuteButton;
+    
+    [Header("Volume Text")]
     [SerializeField] private TextMeshProUGUI masterVolumeText;
     [SerializeField] private TextMeshProUGUI musicVolumeText;
     [SerializeField] private TextMeshProUGUI sfxVolumeText;
     
+    [Header("Mute Icons")]
+    [SerializeField] private Image musicMuteIcon;
+    [SerializeField] private Image sfxMuteIcon;
+    [SerializeField] private Sprite audioOnSprite;
+    [SerializeField] private Sprite audioOffSprite;
+    
     private SoundManager soundManager;
+    
+    private void Start()
+    {
+        // Check if SoundManager exists
+        soundManager = SoundManager.Instance;
+        if (soundManager == null)
+        {
+            Debug.LogError("No SoundManager found! Make sure it's in your scene.");
+            return;
+        }
+        
+        // Set up listeners for sliders
+        if (masterVolumeSlider != null)
+            masterVolumeSlider.onValueChanged.AddListener(OnMasterVolumeChanged);
+        if (musicVolumeSlider != null)
+            musicVolumeSlider.onValueChanged.AddListener(OnMusicVolumeChanged);
+        if (sfxVolumeSlider != null)
+            sfxVolumeSlider.onValueChanged.AddListener(OnSfxVolumeChanged);
+        
+        // Set up listeners for mute buttons
+        if (musicMuteButton != null)
+            musicMuteButton.onClick.AddListener(OnMusicMuteToggled);
+        if (sfxMuteButton != null)
+            sfxMuteButton.onClick.AddListener(OnSfxMuteToggled);
+            
+        // Initialize UI with current values
+        RefreshUI();
+    }
     
     private void OnEnable()
     {
-        soundManager = SoundManager.Instance;
+        // Refresh UI whenever the panel becomes active
         if (soundManager != null)
-        {
-            // Initialize UI with current values
+            RefreshUI();
+    }
+    
+    private void RefreshUI()
+    {
+        // Update sliders
+        if (masterVolumeSlider != null)
             masterVolumeSlider.value = soundManager.GetMasterVolume();
+        if (musicVolumeSlider != null)
             musicVolumeSlider.value = soundManager.GetMusicVolume();
+        if (sfxVolumeSlider != null)
             sfxVolumeSlider.value = soundManager.GetSfxVolume();
-            
-          //  musicMuteToggle.isOn = soundManager.IsMusicMuted();
-          //  sfxMuteToggle.isOn = soundManager.IsSfxMuted();
-            
-            UpdateVolumeText();
-        }
+        
+        // Update mute button icons
+        UpdateMuteIcons();
+        
+        // Update volume text displays
+        UpdateVolumeText();
     }
     
     // Methods to connect to UI events
@@ -60,20 +101,31 @@ public class AudioSettings : MonoBehaviour
             soundManager.PlayButtonSound();
     }
     
-   /* public void OnMusicMuteToggled(bool muted)
+    public void OnMusicMuteToggled()
     {
         soundManager.ToggleMusicMute();
+        UpdateMuteIcons();
     }
     
-    public void OnSfxMuteToggled(bool muted)
+    public void OnSfxMuteToggled()
     {
         soundManager.ToggleSfxMute();
+        UpdateMuteIcons();
         
         // Play test sound when unmuting SFX
-        if (!muted)
+        if (!soundManager.IsSfxMuted())
             soundManager.PlayButtonSound();
     }
-    */
+    
+    private void UpdateMuteIcons()
+    {
+        if (musicMuteIcon != null && audioOnSprite != null && audioOffSprite != null)
+            musicMuteIcon.sprite = soundManager.IsMusicMuted() ? audioOffSprite : audioOnSprite;
+            
+        if (sfxMuteIcon != null && audioOnSprite != null && audioOffSprite != null)
+            sfxMuteIcon.sprite = soundManager.IsSfxMuted() ? audioOffSprite : audioOnSprite;
+    }
+    
     private void UpdateVolumeText()
     {
         if (masterVolumeText != null)

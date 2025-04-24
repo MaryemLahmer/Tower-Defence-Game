@@ -124,7 +124,7 @@ MonoBehaviour:
   splashRadius: 3
   maxHeight: 5
   speed: 10
-  impactEffect: {fileID: 0}
+  impactEffect: {fileID: 4914716930404006884, guid: aed12c224fbc8704d8eaa07a52e88f44, type: 3}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
