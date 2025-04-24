@@ -10,11 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6bae626e246f90b41a73d82434df3b00, type: 3}
-  m_Name: ghostwithhat
+  m_Name: ghostWithHat
   m_EditorClassIdentifier: 
   enemeyPrefab: {fileID: 2064138264570286669, guid: c906dbcb377a3cb4bbb13987857d74cb, type: 3}
   enemyId: 2
-  health: 3
-  score: 1
-  speed: 10
-  reward: 150
