@@ -622,7 +622,7 @@ MonoBehaviour:
   speed: 15
   damage: 10
   explosionRadius: 0
-  impactEffect: {fileID: 2944680210860791533, guid: 719c5f493541d3141b22c113b2778d8c, type: 3}
+  impactEffect: {fileID: 4914716930404006884, guid: aed12c224fbc8704d8eaa07a52e88f44, type: 3}
   impactSound: {fileID: 8300000, guid: 2af69ec48af35f142ae69ccd5b3808ea, type: 3}
   type: 0
   enemyLayer:

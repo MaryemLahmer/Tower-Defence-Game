@@ -21,75 +21,86 @@ public class GameManager : MonoBehaviour
         towersInGame = new List<TowerBehavior>();
         EntitySummoner.Init();
         StartCoroutine(GameLoop());
-        
-        //InvokeRepeating("SummonTest", 0, 1);
-        // Remove the test summoning since we'll use the wave manager now
-        // InvokeRepeating("SummonTest", 0, 1);
-        
         // Listen for wave phase start
         if (phaseManager != null)
         {
             phaseManager.onWavePhaseStart.AddListener(OnWavePhaseStarted);
         }
     }
+
     void OnWavePhaseStarted()
     {
         // Wave phase has started, enemies will be spawned by the WaveManager
         // Any additional setup for the wave phase can go here
         EnqueueEnemyIDToSummon(1);
-        EnqueueEnemyIDToSummon(2);
-        EnqueueEnemyIDToSummon(3);
-        EnqueueEnemyIDToSummon(4);
+       
     }
 
-    // This can be removed since we're using the WaveManager to spawn enemies
-    /*
-    void SummonTest()
-    {
-        EnqueueEnemyIDToSummon(1);
-    }
-    */
-   
 
     IEnumerator GameLoop()
     {
         while (!loopShouldEnd)
         {
-            
-
-            if (enemyIDsToSummon.Count > 0)
+            if (enemyIDsToSummon != null && enemyIDsToSummon.Count > 0)
             {
-                // spawn Enemies 
-                for (int i = 0; i < enemyIDsToSummon.Count; i++)
+                // spawn & move Enemies 
+                int count = enemyIDsToSummon.Count;
+                for (int i = 0; i < count; i++)
                 {
-                    Enemy summonedEnemey = EntitySummoner.SummonEnemy(enemyIDsToSummon.Dequeue());
-                    waveManager.MoveEnemy(summonedEnemey);
-                    summonedEnemey.SetPath(waveManager.GetPathCells());
+                    int enemyId = enemyIDsToSummon.Dequeue();
 
+                    // Check if waveManager is not null before using it
+                    if (waveManager != null)
+                    {
+                        Enemy summonedEnemy = EntitySummoner.SummonEnemy(enemyId);
+                        if (summonedEnemy != null)
+                        {
+                            waveManager.MoveEnemy(summonedEnemy);
+                            summonedEnemy.SetPath(waveManager.GetPathCells());
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogError("waveManager is null in GameLoop");
+                    }
                 }
             }
 
-            //spawn towers
-            // move enemies
-            // tick towers
-            foreach (TowerBehavior tower in towersInGame)
+            // tick towers - check if towersInGame is not null
+            if (towersInGame != null)
             {
-                tower.target = TowerTargeting.GetTarget(tower, TowerTargeting.TargetType.First);
-                tower.Tick();
-            }
-            
-            // apply effects
-            // damage enemies
-            // remove enemies 
-            if (enemiesToRemove.Count > 0)
-            {
-                for (int i = 0; i < enemiesToRemove.Count; i++)
+                // Use a for loop to avoid issues with null items in the collection
+                for (int i = 0; i < towersInGame.Count; i++)
                 {
-                    EntitySummoner.RemoveEnemey(enemiesToRemove.Dequeue());
+                    TowerBehavior tower = towersInGame[i];
+                    if (tower != null)
+                    {
+                        tower.Tick();
+                    }
+                    else
+                    {
+                        // Remove null towers from the list
+                        Debug.LogWarning("Found null tower in towersInGame list, removing it");
+                        towersInGame.RemoveAt(i);
+                        i--; // Adjust index after removal
+                    }
                 }
             }
 
-            // remove towers
+            // Remove enemies with null checks
+            if (enemiesToRemove != null && enemiesToRemove.Count > 0)
+            {
+                int count = enemiesToRemove.Count;
+                for (int i = 0; i < count; i++)
+                {
+                    Enemy enemy = enemiesToRemove.Dequeue();
+                    if (enemy != null)
+                    {
+                        EntitySummoner.RemoveEnemey(enemy);
+                    }
+                }
+            }
+
             yield return null;
         }
     }
@@ -103,7 +114,7 @@ public class GameManager : MonoBehaviour
     {
         enemiesToRemove.Enqueue(enemeyToRemove);
     }
-    
+
     // Add a method to notify when all enemies are cleared
     public void NotifyAllEnemiesCleared()
     {

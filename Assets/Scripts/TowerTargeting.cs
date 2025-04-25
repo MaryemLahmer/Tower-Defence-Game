@@ -19,14 +19,25 @@ public class TowerTargeting
         // Get all enemies in range using OverlapSphere
         Collider[] enemiesInRange = Physics.OverlapSphere(currentTower.transform.position, currentTower.range,
             currentTower.EnemiesLayer);
-       // if (enemiesInRange.Length == 0) return null;
+
+        if (enemiesInRange.Length == 0) return null;
+
         List<Enemy> validEnemies = new List<Enemy>();
         // Extract enemy components
         for (int i = 0; i < enemiesInRange.Length; i++)
         {
-            Enemy currentEnemey = enemiesInRange[i].GetComponent<Enemy>();
-            validEnemies.Add(currentEnemey);
+            Enemy currentEnemy = enemiesInRange[i].GetComponent<Enemy>();
+
+            if (currentEnemy != null)
+            {
+                validEnemies.Add(currentEnemy);
+            }
+            else
+            {
+                Debug.Log($"No Enemy component on object: {enemiesInRange[i].gameObject.name}");
+            }
         }
+
 
         if (validEnemies.Count == 0) return null;
 
@@ -53,7 +64,6 @@ public class TowerTargeting
                 furthestAlongPath = enemy;
                 highestNodeIndex = enemy.currentPathIndex;
             }
-           
         }
 
         return furthestAlongPath;
@@ -110,7 +120,4 @@ public class TowerTargeting
 
         return strongestEnemy;
     }
-
-
-  
 }

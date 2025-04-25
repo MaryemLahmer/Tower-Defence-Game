@@ -341,7 +341,7 @@ MonoBehaviour:
   range: 10
   towerPivot: {fileID: 6154887622360904249}
   target: {fileID: 0}
-  firePoint: {fileID: 0}
+  firePoint: {fileID: 8416780138465643518}
   targetingMethod: 0
   showRangeVisually: 1
 --- !u!114 &7650888503480083608

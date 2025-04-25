@@ -7,9 +7,9 @@ using TMPro;
 public class WaveManager : MonoBehaviour
 {
     [Header("Phase Settings")]
-    [SerializeField] private float placementPhaseDuration = 5f;
-    [SerializeField] private float wavePhaseDuration = 18f;
-    [SerializeField] private float announcementTime = 3f;
+    [SerializeField] private float placementPhaseDuration = 3f;
+    [SerializeField] private float wavePhaseDuration = 8f;
+    [SerializeField] private float announcementTime = 1f;
     
     [Header("UI References")]
     [SerializeField] private TextMeshProUGUI announcementText;
@@ -148,7 +148,7 @@ public class WaveManager : MonoBehaviour
         // Show announcement
         ShowAnnouncement($"WAVE {currentWave}\nPLACEMENT PHASE - {Mathf.CeilToInt(placementPhaseDuration)}s");
         
-        Debug.Log($"Wave {currentWave}: Placement phase started. Place your towers! ({placementPhaseDuration} seconds)");
+       // Debug.Log($"Wave {currentWave}: Placement phase started. Place your towers! ({placementPhaseDuration} seconds)");
     }
     
     private void StartWavePhase()
@@ -176,12 +176,12 @@ public class WaveManager : MonoBehaviour
         // Show announcement
         ShowAnnouncement($"WAVE {currentWave} STARTED!\nDEFEND YOUR BASE!");
         
-        Debug.Log($"Wave {currentWave}: Defense phase started! Enemies incoming! ({wavePhaseDuration} seconds)");
+        //Debug.Log($"Wave {currentWave}: Defense phase started! Enemies incoming! ({wavePhaseDuration} seconds)");
     }
     
     private void CompleteWave()
     {
-        Debug.Log($"Wave {currentWave} completed!");
+        //Debug.Log($"Wave {currentWave} completed!");
         
         // Award wave completion bonus
         // You can add bonus rewards here
@@ -204,8 +204,7 @@ public class WaveManager : MonoBehaviour
             StartCoroutine(AnimateAnnouncement(message));
         }
         
-        // Also log to console for debugging
-        Debug.Log(message);
+     
     }
     
     private IEnumerator AnimateAnnouncement(string message)

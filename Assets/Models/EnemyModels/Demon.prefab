@@ -57,7 +57,7 @@ MonoBehaviour:
   maxHealth: 0
   health: 0
   speed: 0.2
-  id: 1
+  id: 4
   currentPathIndex: 0
   damageEffect: {fileID: 0}
 --- !u!65 &2655713557908701767
