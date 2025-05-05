@@ -17,6 +17,10 @@ public class TowerBehavior : MonoBehaviour
     public TowerTargeting.TargetType targetingMethod = TowerTargeting.TargetType.First;
     public bool showRangeVisually = true;
 
+    [Header("Audio")]
+    [SerializeField] public int towerSoundTypeIndex = 0; // Index into SoundManager's towerFireSounds array
+    [SerializeField] private float soundCooldown = 0.1f; // Prevent sound spam
+    private float lastSoundTime;
     // Damage method component
     private IDamageMethod damageMethod;
 
@@ -66,12 +70,35 @@ public class TowerBehavior : MonoBehaviour
 
             // Apply damage via IDamageMethod
             if (damageMethod != null)
+        {
+            // Modify damageMethod.DamageTick to return bool indicating if it fired
+            bool didFire = damageMethod.DamageTick(target.gameObject);
+            
+            // If tower fired and enough time has passed since last sound
+            if (didFire && Time.time > lastSoundTime + soundCooldown)
             {
-                damageMethod.DamageTick(target.gameObject);
+                // Play firing sound
+                if (SoundManager.Instance != null)
+                {
+                    SoundManager.Instance.PlayTowerFireSound(towerSoundTypeIndex, transform.position);
+                    lastSoundTime = Time.time;
+                }
             }
+        }
         }
     }
     
+    public void PlayFireSound()
+{
+    if (Time.time > lastSoundTime + soundCooldown)
+    {
+        if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.PlayTowerFireSound(towerSoundTypeIndex, transform.position);
+            lastSoundTime = Time.time;
+        }
+    }
+}
     // Visualize range in Scene view
     void OnDrawGizmosSelected()
     {

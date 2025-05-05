@@ -19,12 +19,12 @@ public class ProjectileDamage : MonoBehaviour, IDamageMethod
     }
 
 
-    public void DamageTick(GameObject target)
+    public bool DamageTick(GameObject target)
     {
         if (delay > 0)
         {
             delay -= Time.deltaTime;
-            return;
+            return false;
         }
 
         if (projectilePrefab && target)
@@ -38,13 +38,15 @@ public class ProjectileDamage : MonoBehaviour, IDamageMethod
                 Enemy enemy = target.GetComponent<Enemy>();
                 projectile.Seek(enemy);
                 projectile.damage = damage;
+                
+                // reset cooldown
+                delay = 1f / fireRate;
+                return true; // Successfully fired a projectile
             }
         }
-        // reset cooldown
+        
+        // reset cooldown even if something failed
         delay = 1f / fireRate;
+        return false; // Failed to fire projectile
     }
-    
-   
-
-
 }

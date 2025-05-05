@@ -129,11 +129,12 @@ public class EconomyManager : MonoBehaviour
         
         // Increase consecutive leaks
         consecutiveLeaks++;
-        
+        bool multiplierChanged = false;
         // Check if multiplier should decrease
         if (consecutiveLeaks >= leaksForMultiplierDecrease)
         {
             consecutiveLeaks = 0;
+            multiplierChanged = true;
             DecreaseMultiplier(1);
         }
         
@@ -141,8 +142,12 @@ public class EconomyManager : MonoBehaviour
         if (currentMultiplier > 0)
         {
             currentMultiplier = -1;
+            multiplierChanged = true;
         }
-        
+        if (multiplierChanged && SoundManager.Instance != null)
+    {
+        StartCoroutine(PlayDelayedMultiplierSound());
+    }
        int scorePenalty = 10; // Default penalty if enemyData is null
     
     // Add this check to prevent null reference
@@ -216,6 +221,16 @@ public class EconomyManager : MonoBehaviour
         }
     }
     
+    private IEnumerator PlayDelayedMultiplierSound()
+{
+    // Small delay so it doesn't overlap with the enemy leak sound
+    yield return new WaitForSeconds(0.3f);
+    
+    if (SoundManager.Instance != null)
+    {
+        SoundManager.Instance.PlayMultiplierDecreaseSound();
+    }
+}
     // Tower purchase logic
     public bool TryPurchaseTower(int towerIndex)
     {

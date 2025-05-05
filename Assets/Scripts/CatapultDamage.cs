@@ -33,25 +33,29 @@ public class CatapultDamage : MonoBehaviour, IDamageMethod
         }
     }
     
-    public void DamageTick(GameObject target)
+    public bool DamageTick(GameObject target)
+{
+    if (delay > 0)
     {
-        if (delay > 0)
-        {
-            delay -= Time.deltaTime;
-        }
-        
-        // Return arm to rest position when not firing
-        if (catapultArm != null && !isAnimating)
-        {
-            catapultArm.rotation = Quaternion.Slerp(catapultArm.rotation, restPosition, Time.deltaTime * armRotationSpeed);
-        }
-        
-        if (delay <= 0 && target != null)
-        {
-            FireProjectile(target);
-            delay = 1f / fireRate;
-        }
+        delay -= Time.deltaTime;
+        return false; // Did not fire, still on cooldown
     }
+    
+    // Return arm to rest position when not firing
+    if (catapultArm != null && !isAnimating)
+    {
+        catapultArm.rotation = Quaternion.Slerp(catapultArm.rotation, restPosition, Time.deltaTime * armRotationSpeed);
+    }
+    
+    if (delay <= 0 && target != null)
+    {
+        FireProjectile(target);
+        delay = 1f / fireRate;
+        return true; // Successfully fired
+    }
+    
+    return false; // Did not fire (no target)
+}
     
     private void FireProjectile(GameObject target)
     {

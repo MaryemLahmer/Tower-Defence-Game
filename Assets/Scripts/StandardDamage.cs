@@ -4,35 +4,42 @@ using UnityEngine;
 
 public interface IDamageMethod
 {
-    // public void DamageTick(Enemy target);
-    public void DamageTick(GameObject target); 
-    public void Init(float damage, float fireRat);
+    // Update to return bool to indicate when tower fires
+    bool DamageTick(GameObject target); 
+    void Init(float damage, float fireRate);
 }
+
 public class StandardDamage : MonoBehaviour, IDamageMethod
 {
     private float damage, fireRate, delay;
+    
     public void Init(float damage, float fireRate)
     {
         this.damage = damage;
         this.fireRate = fireRate;
         delay = 1f / fireRate;
     }
-    public void DamageTick(GameObject target)
+    
+    public bool DamageTick(GameObject target)
     {
         if (delay > 0)
         {
             delay -= Time.deltaTime;
-            return;
+            return false; // Did not fire this frame
         }
         
-        // apply damage to the enemy here
+        // Apply damage to the enemy here
         Enemy enemy = target.GetComponent<Enemy>();
-        if (enemy) enemy.TakeDamage(damage);
+        if (enemy) 
+        {
+            enemy.TakeDamage(damage);
+            
+            // Reset cooldown
+            delay = 1f/fireRate;
+            
+            return true; // Successfully fired this frame
+        }
         
-        // reset cooldown
-        delay = 1f/fireRate;
+        return false; // Failed to fire (no enemy component)
     }
-
-  
-    
 }

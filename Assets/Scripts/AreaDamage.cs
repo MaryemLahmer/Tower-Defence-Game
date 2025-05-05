@@ -14,16 +14,18 @@ public class AreaDamage : MonoBehaviour, IDamageMethod
         delay = 1f / fireRate;
     }
 
-    public void DamageTick(GameObject target)
+    public bool DamageTick(GameObject target)
     {
         if (delay > 0)
         {
             delay -= Time.deltaTime;
-            return;
+            return false;
         }
-
+        
         // Find all enemies in radius
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius, enemyLayer);
+        
+        bool hitAnyEnemy = false;
 
         // Create effect if available
         if (effectPrefab != null)
@@ -38,10 +40,14 @@ public class AreaDamage : MonoBehaviour, IDamageMethod
             if (enemy != null)
             {
                 enemy.TakeDamage(damage);
+                hitAnyEnemy = true;
             }
         }
 
         // Reset cooldown
         delay = 1f / fireRate;
+        
+        // Return true if we hit at least one enemy
+        return hitAnyEnemy;
     }
 }

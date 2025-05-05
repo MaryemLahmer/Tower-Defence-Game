@@ -21,6 +21,11 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip buttonClickSound;
     [SerializeField] private AudioClip towerPlacedSound;
     [SerializeField] private AudioClip enemyDefeatedSound;
+
+    [Header("Tower Sounds")]
+    [SerializeField] private AudioClip[] towerFireSounds; // Array for different tower types
+    [SerializeField] private AudioClip enemyLeakSound;
+    [SerializeField] private AudioClip multiplierDecreaseSound;
     
     // Volume settings
     [Header("Volume Settings")]
@@ -97,6 +102,35 @@ public class SoundManager : MonoBehaviour
         }
     }
     
+    // Play sound for tower firing
+public void PlayTowerFireSound(int towerTypeIndex, Vector3 position)
+{
+    if (towerFireSounds == null || towerFireSounds.Length == 0 || isSfxMuted)
+        return;
+        
+    // Default to first sound if index out of range
+    int index = Mathf.Clamp(towerTypeIndex, 0, towerFireSounds.Length - 1);
+    
+    // Use PlayClipAtPoint for positional audio
+    AudioSource.PlayClipAtPoint(
+        towerFireSounds[index], 
+        position, 
+        sfxVolume * masterVolume
+    );
+}
+    // Play sound for enemy leaking (reaching end of path)
+public void PlayEnemyLeakSound()
+{
+    PlaySFX(enemyLeakSound, 1.2f); // Slightly louder for emphasis
+}
+
+// Play sound for multiplier decrease
+public void PlayMultiplierDecreaseSound()
+{
+    PlaySFX(multiplierDecreaseSound);
+}
+
+
     // SFX methods
     public void PlayButtonSound()
     {
@@ -113,13 +147,14 @@ public class SoundManager : MonoBehaviour
         PlaySFX(enemyDefeatedSound);
     }
     
-    private void PlaySFX(AudioClip clip)
+    // Enhanced PlaySFX method with volume modifier parameter
+public void PlaySFX(AudioClip clip, float volumeModifier = 1.0f)
+{
+    if (clip != null && !isSfxMuted)
     {
-        if (clip != null && !isSfxMuted)
-        {
-            sfxSource.PlayOneShot(clip, sfxVolume * masterVolume);
-        }
+        sfxSource.PlayOneShot(clip, sfxVolume * masterVolume * volumeModifier);
     }
+}
     
     // Volume control methods
     public void SetMasterVolume(float volume)

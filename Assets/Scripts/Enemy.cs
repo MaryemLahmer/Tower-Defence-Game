@@ -179,6 +179,11 @@ public void InitWithData(EnemySummonData data)
             enemyData.score = 10;
             enemyData.enemyId = id;
         }
+        // Play leak sound
+            if (SoundManager.Instance != null)
+            {
+                SoundManager.Instance.PlayEnemyLeakSound();
+            }
             OnLeak.Invoke(this);
             EntitySummoner.RemoveEnemey(this);
         }
@@ -224,13 +229,19 @@ public void InitWithData(EnemySummonData data)
 }
     
     void Die()
+{
+    // Play death sound
+    if (SoundManager.Instance != null)
     {
-        // Trigger defeat event (for score, etc.)
-        OnDefeat.Invoke(this);
-        
-        // Return to object pool
-        EntitySummoner.RemoveEnemey(this);
+        SoundManager.Instance.PlayEnemyDefeatedSound();
     }
+    
+    // Trigger defeat event (for score, etc.)
+    OnDefeat.Invoke(this);
+    
+    // Return to object pool
+    EntitySummoner.RemoveEnemey(this);
+}
     
     // Visual feedback when taking damage
     IEnumerator FlashDamage()

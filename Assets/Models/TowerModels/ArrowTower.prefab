@@ -245,6 +245,8 @@ MonoBehaviour:
   firePoint: {fileID: 0}
   targetingMethod: 0
   showRangeVisually: 1
+  towerSoundTypeIndex: 2
+  soundCooldown: 0.1
 --- !u!114 &7650888503480083608
 MonoBehaviour:
   m_ObjectHideFlags: 0
