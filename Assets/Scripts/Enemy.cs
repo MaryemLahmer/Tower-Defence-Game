@@ -18,6 +18,10 @@ public class Enemy : MonoBehaviour
     private List<Vector2Int> pathCells;
     public int currentPathIndex = 0;
     private bool pathCompleted = false;
+
+    private Vector3 currentMoveDirection;   
+
+    private float rotationSpeed = 8f;
     
     [Header("Visual Feedback")]
     [SerializeField] private GameObject healthBarObject;
@@ -135,6 +139,11 @@ public void InitWithData(EnemySummonData data)
         
         // Position enemy at first waypoint
         transform.position = new Vector3(path[0].x, 0.2f, path[0].y);
+
+        // Initialize movement direction toward first waypoint
+    Vector3 firstWaypointPos = new Vector3(path[1].x, 0.2f, path[1].y);
+    currentMoveDirection = (firstWaypointPos - transform.position).normalized;
+    transform.rotation = Quaternion.LookRotation(currentMoveDirection);
     }
     
     void Update()
@@ -146,7 +155,7 @@ public void InitWithData(EnemySummonData data)
         }
     }
     
-    private void MoveAlongPath()
+private void MoveAlongPath()
 {
     // Get target waypoint
     Vector3 targetPosition = new Vector3(
@@ -155,11 +164,23 @@ public void InitWithData(EnemySummonData data)
         pathCells[currentPathIndex].y
     );
     
-    // Move towards it
+    // Calculate direction to target
+    Vector3 directionToTarget = (targetPosition - transform.position).normalized;
+    if (directionToTarget != Vector3.zero)
+    {
+        // Update current direction
+        currentMoveDirection = directionToTarget;
+        
+        // Smoothly rotate towards the movement direction
+        Quaternion targetRotation = Quaternion.LookRotation(currentMoveDirection);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+    }
+    
+    // Move towards target (unchanged)
     float step = speed * Time.deltaTime;
     transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
     
-    // Check if reached waypoint
+    // Check if reached waypoint (unchanged)
     if (Vector3.Distance(transform.position, targetPosition) < 0.05f)
     {
         // Move to next waypoint
@@ -173,13 +194,13 @@ public void InitWithData(EnemySummonData data)
             pathCompleted = true;
 
             if (enemyData == null)
-        {
-            Debug.LogWarning($"Creating emergency enemyData for enemy {id} before leak event");
-            enemyData = ScriptableObject.CreateInstance<EnemySummonData>();
-            enemyData.score = 10;
-            enemyData.enemyId = id;
-        }
-        // Play leak sound
+            {
+                Debug.LogWarning($"Creating emergency enemyData for enemy {id} before leak event");
+                enemyData = ScriptableObject.CreateInstance<EnemySummonData>();
+                enemyData.score = 10;
+                enemyData.enemyId = id;
+            }
+            // Play leak sound
             if (SoundManager.Instance != null)
             {
                 SoundManager.Instance.PlayEnemyLeakSound();

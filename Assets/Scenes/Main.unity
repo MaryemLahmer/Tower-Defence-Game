@@ -2991,50 +2991,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7148495726831555196, guid: 8594b3cd9c78a5e46be783f689fbb4c9, type: 3}
-      propertyPath: gameMusic
-      value: 
-      objectReference: {fileID: 8300000, guid: 6ae0d1ff995f00a45b33692b8272fb08, type: 3}
-    - target: {fileID: 7148495726831555196, guid: 8594b3cd9c78a5e46be783f689fbb4c9, type: 3}
-      propertyPath: sfxVolume
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7148495726831555196, guid: 8594b3cd9c78a5e46be783f689fbb4c9, type: 3}
-      propertyPath: musicVolume
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7148495726831555196, guid: 8594b3cd9c78a5e46be783f689fbb4c9, type: 3}
-      propertyPath: enemyLeakSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 44454e613e0d78d45a9a8de789719672, type: 3}
-    - target: {fileID: 7148495726831555196, guid: 8594b3cd9c78a5e46be783f689fbb4c9, type: 3}
-      propertyPath: buttonClickSound
-      value: 
-      objectReference: {fileID: 8300000, guid: e70e0d59fe6e62a46b49f91e870d50ef, type: 3}
-    - target: {fileID: 7148495726831555196, guid: 8594b3cd9c78a5e46be783f689fbb4c9, type: 3}
-      propertyPath: multiplierDecreaseSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 44454e613e0d78d45a9a8de789719672, type: 3}
-    - target: {fileID: 7148495726831555196, guid: 8594b3cd9c78a5e46be783f689fbb4c9, type: 3}
-      propertyPath: towerFireSounds.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7148495726831555196, guid: 8594b3cd9c78a5e46be783f689fbb4c9, type: 3}
-      propertyPath: towerFireSounds.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: f39dfa71482d85c4b89c296c6d92cedc, type: 3}
-    - target: {fileID: 7148495726831555196, guid: 8594b3cd9c78a5e46be783f689fbb4c9, type: 3}
-      propertyPath: towerFireSounds.Array.data[1]
-      value: 
-      objectReference: {fileID: 8300000, guid: 316e7c07e21d5324cb9a9c0893ef6905, type: 3}
-    - target: {fileID: 7148495726831555196, guid: 8594b3cd9c78a5e46be783f689fbb4c9, type: 3}
-      propertyPath: towerFireSounds.Array.data[2]
-      value: 
-      objectReference: {fileID: 8300000, guid: 2e1678d82e9b69243849735af77e0bd4, type: 3}
-    - target: {fileID: 7148495726831555196, guid: 8594b3cd9c78a5e46be783f689fbb4c9, type: 3}
-      propertyPath: towerFireSounds.Array.data[3]
-      value: 
-      objectReference: {fileID: 8300000, guid: 386eebe9fbd4d8347bf18c730e92f297, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

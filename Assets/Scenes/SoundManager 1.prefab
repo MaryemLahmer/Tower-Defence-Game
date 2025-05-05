@@ -47,10 +47,17 @@ MonoBehaviour:
   musicSource: {fileID: 0}
   sfxSource: {fileID: 0}
   menuMusic: {fileID: 8300000, guid: 82c4e2d74e64497498e2ca383be6bf93, type: 3}
-  gameMusic: {fileID: 8300000, guid: 82c4e2d74e64497498e2ca383be6bf93, type: 3}
-  buttonClickSound: {fileID: 0}
+  gameMusic: {fileID: 8300000, guid: 6ae0d1ff995f00a45b33692b8272fb08, type: 3}
+  buttonClickSound: {fileID: 8300000, guid: e70e0d59fe6e62a46b49f91e870d50ef, type: 3}
   towerPlacedSound: {fileID: 0}
   enemyDefeatedSound: {fileID: 0}
+  towerFireSounds:
+  - {fileID: 8300000, guid: f39dfa71482d85c4b89c296c6d92cedc, type: 3}
+  - {fileID: 8300000, guid: 316e7c07e21d5324cb9a9c0893ef6905, type: 3}
+  - {fileID: 8300000, guid: 2e1678d82e9b69243849735af77e0bd4, type: 3}
+  - {fileID: 8300000, guid: 386eebe9fbd4d8347bf18c730e92f297, type: 3}
+  enemyLeakSound: {fileID: 8300000, guid: 44454e613e0d78d45a9a8de789719672, type: 3}
+  multiplierDecreaseSound: {fileID: 8300000, guid: 44454e613e0d78d45a9a8de789719672, type: 3}
   masterVolume: 1
-  musicVolume: 0.5
-  sfxVolume: 0.7
+  musicVolume: 1
+  sfxVolume: 0.4
