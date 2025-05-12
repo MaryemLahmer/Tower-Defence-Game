@@ -257,7 +257,7 @@ public class TourPlacement : MonoBehaviour
         }
         
         // Set final tower scale
-        finalTower.transform.localScale = Vector3.one;
+        finalTower.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         
         // Reset materials to non-transparent
         Renderer[] renderers = finalTower.GetComponentsInChildren<Renderer>();
@@ -272,8 +272,6 @@ public class TourPlacement : MonoBehaviour
             cellObj.tag = "UsedCell";
         }
         
-        // Log placement
-        Debug.Log($"Tower placed at {position}");
         
         // Clean up preview
         Destroy(currentPlacingTower);

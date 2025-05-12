@@ -95,7 +95,6 @@ public void InitWithData(EnemySummonData data)
         speed = 2;
         reward = 10;
     }
-    Debug.Log($"After Init - Enemy {id} has enemyData: {enemyData != null}");
     // Reset path following
     currentPathIndex = 0;
     pathCompleted = false;
@@ -129,7 +128,6 @@ public void InitWithData(EnemySummonData data)
     {
         if (path == null || path.Count < 2)
         {
-            Debug.LogError("Invalid path provided to enemy - need at least 2 points");
             return;
         }
         
