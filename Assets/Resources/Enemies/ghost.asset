@@ -15,6 +15,6 @@ MonoBehaviour:
   enemeyPrefab: {fileID: 7366629821905038689, guid: 7752762effc90d2439953d805357041b, type: 3}
   enemyId: 1
   health: 40
-  score: 1
+  score: 40
   speed: 3
-  reward: 5
+  reward: 40

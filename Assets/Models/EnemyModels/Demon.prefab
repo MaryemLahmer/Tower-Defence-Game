@@ -54,12 +54,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f85941d13bd231f4e8e4691008a13e1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
-  health: 0
-  speed: 0.2
+  maxHealth: 700
+  health: 700
+  speed: 2
   id: 1
+  reward: 20
+  enemyData: {fileID: 0}
   currentPathIndex: 0
-  damageEffect: {fileID: 0}
+  healthBarObject: {fileID: 0}
+  healthBarFill: {fileID: 0}
+  OnDefeat:
+    m_PersistentCalls:
+      m_Calls: []
+  OnLeak:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &2655713557908701767
 BoxCollider:
   m_ObjectHideFlags: 0

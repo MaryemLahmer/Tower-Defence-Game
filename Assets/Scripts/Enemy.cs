@@ -31,30 +31,23 @@ public void InitWithData(EnemySummonData data)
 {
     if (data == null)
     {
-        Debug.LogError("Tried to initialize enemy with null data!");
         return;
     }
     
-    // Store reference
     enemyData = data;
     
-    // Set stats from scriptable object
     id = data.enemyId;
     maxHealth = data.health;
     health = data.health;
     speed = data.speed;
     
-    // Reset path following
     currentPathIndex = 0;
     pathCompleted = false;
     
-    // Update visuals
     UpdateHealthBar();
     
-    // Make sure object is active
     gameObject.SetActive(true);
     
-    Debug.Log($"Enemy initialized with ID: {id}, Health: {health}, Speed: {speed}");
 }
     // Events
     public UnityEvent<Enemy> OnDefeat = new UnityEvent<Enemy>();
@@ -68,15 +61,11 @@ public void InitWithData(EnemySummonData data)
     
     if (data != null)
     {
-        // Store reference to data
         enemyData = data;
-        
-        // Set stats from data
         maxHealth = data.health;
         health = data.health;
         speed = data.speed;
         reward = data.reward;
-        Debug.Log($"Initialized enemy ID {id} with health={health}, speed={speed}");
     }
     else
     {
@@ -131,14 +120,12 @@ public void InitWithData(EnemySummonData data)
             return;
         }
         
-        pathCells = new List<Vector2Int>(path); // Make a copy to avoid reference issues
-        currentPathIndex = 1; // Start with the second point (index 1)
+        pathCells = new List<Vector2Int>(path); 
+        currentPathIndex = 1; 
         pathCompleted = false;
         
-        // Position enemy at first waypoint
         transform.position = new Vector3(path[0].x, 0.2f, path[0].y);
 
-        // Initialize movement direction toward first waypoint
     Vector3 firstWaypointPos = new Vector3(path[1].x, 0.2f, path[1].y);
     currentMoveDirection = (firstWaypointPos - transform.position).normalized;
     transform.rotation = Quaternion.LookRotation(currentMoveDirection);
@@ -187,22 +174,16 @@ private void MoveAlongPath()
         // Check if we've reached the end
         if (currentPathIndex >= pathCells.Count)
         {   
-            Debug.Log($"Enemy {id} reached end of path. Has enemyData: {enemyData != null}");
             // Path completed
             pathCompleted = true;
 
             if (enemyData == null)
             {
-                Debug.LogWarning($"Creating emergency enemyData for enemy {id} before leak event");
                 enemyData = ScriptableObject.CreateInstance<EnemySummonData>();
                 enemyData.score = 10;
                 enemyData.enemyId = id;
             }
-            // Play leak sound
-            if (SoundManager.Instance != null)
-            {
-                SoundManager.Instance.PlayEnemyLeakSound();
-            }
+           
             OnLeak.Invoke(this);
             EntitySummoner.RemoveEnemey(this);
         }
@@ -213,34 +194,27 @@ private void MoveAlongPath()
     {
         pathCompleted = true;
         
-        // Enemy reached the end - trigger leak event
         OnLeak.Invoke(this);
         
-        // Return to pool
         EntitySummoner.RemoveEnemey(this);
     }
     
-    // Take damage and check if health <= 0
     public void TakeDamage(float damageAmount)
 {
-    // Check if already dead or inactive
     if (health <= 0 || !gameObject.activeInHierarchy)
     {
-        return; // Don't apply damage to dead/inactive enemies
+        return; 
     }
 
     health -= damageAmount;
     
-    // Update health bar
     UpdateHealthBar();
     
-    // Visual feedback (only if active)
     if (gameObject.activeInHierarchy)
     {
         StartCoroutine(FlashDamage());
     }
     
-    // Check if enemy is defeated
     if (health <= 0)
     {
         Die();
@@ -249,7 +223,6 @@ private void MoveAlongPath()
     
     void Die()
 {
-    // Play death sound
     if (SoundManager.Instance != null)
     {
         SoundManager.Instance.PlayEnemyDefeatedSound();

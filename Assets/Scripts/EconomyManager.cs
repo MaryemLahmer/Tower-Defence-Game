@@ -5,7 +5,7 @@ using UnityEngine;
 public class EconomyManager : MonoBehaviour
 {
     [Header("Economy Settings")]
-    [SerializeField] private int startingMoney = 100;
+    [SerializeField] private int startingMoney = 200;
     
     [Header("Multiplier Settings")]
     [SerializeField] private int startingMultiplier = 1;
@@ -17,7 +17,6 @@ public class EconomyManager : MonoBehaviour
     [Header("References")]
     [SerializeField] private TowerDefenseUI uiManager;
     
-    // Game state
     private int currentScore = 0;
     private int currentMoney = 0;
     private int currentMultiplier = 1;
@@ -29,7 +28,6 @@ public class EconomyManager : MonoBehaviour
     
     private void Awake()
     {
-        // Singleton setup
         if (Instance == null)
         {
             Instance = this;
@@ -43,31 +41,25 @@ public class EconomyManager : MonoBehaviour
     
     private void Start()
     {
-        // Find UI if not assigned
         if (uiManager == null)
         {
             uiManager = FindObjectOfType<TowerDefenseUI>();
         }
         
-        // Initialize game state
         currentMoney = startingMoney;
         currentMultiplier = startingMultiplier;
         
-        // Update UI
         UpdateUI();
         
-        // Register for enemy events
         RegisterEnemyEvents();
     }
     
     // Register for enemy events when they're spawned
     public void RegisterEnemyEvents()
     {
-        // Add event listener to EntitySummoner
         EntitySummoner.OnEnemySpawned += OnEnemySpawned;
     }
     
-    // Subscribe to events when a new enemy is spawned
     private void OnEnemySpawned(Enemy enemy)
     {
         if (enemy != null)
@@ -75,29 +67,23 @@ public class EconomyManager : MonoBehaviour
             enemy.OnDefeat.AddListener(OnEnemyDefeated);
             enemy.OnLeak.AddListener(OnEnemyLeak);
             
-            Debug.Log($"Subscribed to events for enemy {enemy.id}");
         }
     }
     
     // Called when an enemy is defeated
     private void OnEnemyDefeated(Enemy enemy)
     {
-        Debug.Log($"Enemy defeated: {enemy.id}");
         
-        // Reset consecutive leaks
         consecutiveLeaks = 0;
         
-        // Increase consecutive kills
         consecutiveKills++;
         
-        // Check if multiplier should increase
         if (consecutiveKills >= killsForMultiplierIncrease)
         {
             consecutiveKills = 0;
             IncreaseMultiplier(1);
         }
         
-        // If multiplier is negative, reset to +1
         if (currentMultiplier < 0)
         {
             currentMultiplier = 1;
@@ -108,21 +94,16 @@ public class EconomyManager : MonoBehaviour
         AddScore(scoreReward);
         AddMoney(enemy.enemyData.reward);
         
-        Debug.Log($"Added {scoreReward} score and {enemy.enemyData.reward} money");
         
-        // Update UI
         UpdateUI();
     }
     
-    // Called when an enemy leaks (reaches end of path)
     private void OnEnemyLeak(Enemy enemy)
     {
             if (enemy == null)
         {
-            Debug.LogError("OnEnemyLeak called with null enemy");
             return;
         }
-        Debug.Log($"Enemy leaked: {enemy.id}");
         
         // Reset consecutive kills
         consecutiveKills = 0;
@@ -144,10 +125,7 @@ public class EconomyManager : MonoBehaviour
             currentMultiplier = -1;
             multiplierChanged = true;
         }
-        if (multiplierChanged && SoundManager.Instance != null)
-    {
-        StartCoroutine(PlayDelayedMultiplierSound());
-    }
+      
        int scorePenalty = 10; // Default penalty if enemyData is null
     
     // Add this check to prevent null reference
@@ -156,19 +134,13 @@ public class EconomyManager : MonoBehaviour
         scorePenalty = enemy.enemyData.score * Mathf.Abs(currentMultiplier);
         Debug.Log($"Using score from enemyData: {enemy.enemyData.score}");
     }
-    else
-    {
-        Debug.LogWarning($"Enemy {enemy?.id} has null enemyData, using default score penalty");
-    }
+  
     
     AddScore(-scorePenalty);
-    Debug.Log($"Subtracted {scorePenalty} score");
         
-        // Update UI
         UpdateUI();
     }
     
-    // Add to current score
     public void AddScore(int amount)
     {
         currentScore = Mathf.Max(0, currentScore + amount);
@@ -221,25 +193,14 @@ public class EconomyManager : MonoBehaviour
         }
     }
     
-    private IEnumerator PlayDelayedMultiplierSound()
-{
-    // Small delay so it doesn't overlap with the enemy leak sound
-    yield return new WaitForSeconds(0.3f);
-    
-    if (SoundManager.Instance != null)
-    {
-        SoundManager.Instance.PlayMultiplierDecreaseSound();
-    }
-}
-    // Tower purchase logic
+  
     public bool TryPurchaseTower(int towerIndex)
     {
         // Define tower costs (should be retrieved from tower data)
-        int[] towerCosts = { 100, 150, 200, 250 };
+        int[] towerCosts = { 80, 110, 200, 250 };
         
         if (towerIndex < 0 || towerIndex >= towerCosts.Length)
         {
-            Debug.LogError($"Invalid tower index: {towerIndex}");
             return false;
         }
         
@@ -247,11 +208,9 @@ public class EconomyManager : MonoBehaviour
         
         if (TryPurchase(cost))
         {
-            Debug.Log($"Tour de type {towerIndex} achetée pour {cost}$");
             return true;
         }
         
-        Debug.Log($"Pas assez d'argent pour la tour {towerIndex} (Coût: {cost}$)");
         return false;
     }
     

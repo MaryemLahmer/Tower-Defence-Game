@@ -19,7 +19,6 @@ public class TourPlacement : MonoBehaviour
     private int currentTowerIndex = -1;
     private bool isValidPlacement = false;
     
-    // Reference to economy manager
     private EconomyManager economyManager;
     
     void Start()
@@ -30,8 +29,6 @@ public class TourPlacement : MonoBehaviour
             
         // Get economy manager
         economyManager = FindObjectOfType<EconomyManager>();
-        if (economyManager == null)
-            Debug.LogError("No EconomyManager found in scene! Tower purchases won't work.");
     }
 
     void Update()
@@ -96,7 +93,6 @@ public class TourPlacement : MonoBehaviour
         int cost = GetTowerCost(towerIndex);
         if (economyManager != null && !economyManager.CanAfford(cost))
         {
-            Debug.Log($"Cannot afford tower: {cost} money required");
             return;
         }
         
@@ -199,23 +195,21 @@ public class TourPlacement : MonoBehaviour
         material.renderQueue = 3000;
     }
     
-    // Try to purchase the current tower
     private bool AttemptPurchase()
     {
         if (economyManager == null || currentTowerIndex < 0)
-            return true; // No economy system, allow placement
+            return true; 
             
         int cost = GetTowerCost(currentTowerIndex);
         return economyManager.TryPurchase(cost);
     }
     
-    // Get cost for a tower type
     private int GetTowerCost(int index)
     {
         if (index >= 0 && index < towerCosts.Length)
             return towerCosts[index];
             
-        return 100; // Default cost
+        return 100; 
     }
     
     // Place tower at position and update cell
