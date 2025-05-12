@@ -1863,6 +1863,10 @@ PrefabInstance:
       propertyPath: towerPlacedSound
       value: 
       objectReference: {fileID: 8300000, guid: e70e0d59fe6e62a46b49f91e870d50ef, type: 3}
+    - target: {fileID: 7148495726831555196, guid: 8594b3cd9c78a5e46be783f689fbb4c9, type: 3}
+      propertyPath: enemyDefeatedSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 8a42266be58db4c518b5d4e47cc0f780, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

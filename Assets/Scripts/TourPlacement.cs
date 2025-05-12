@@ -245,7 +245,6 @@ public class TourPlacement : MonoBehaviour
         }
         else
         {
-            // If we don't know the index, just clone the preview
             finalTower = Instantiate(currentPlacingTower, position, Quaternion.identity);
             
             // Re-enable scripts that might have been disabled
@@ -257,7 +256,8 @@ public class TourPlacement : MonoBehaviour
         }
         
         // Set final tower scale
-        finalTower.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        finalTower.transform.localScale = new Vector3(0.7f, 0.8f, 0.7f);
+        SoundManager.Instance.PlayTowerPlacedSound();
         
         // Reset materials to non-transparent
         Renderer[] renderers = finalTower.GetComponentsInChildren<Renderer>();
@@ -273,7 +273,6 @@ public class TourPlacement : MonoBehaviour
         }
         
         
-        // Clean up preview
         Destroy(currentPlacingTower);
         currentPlacingTower = null;
         currentTowerIndex = -1;

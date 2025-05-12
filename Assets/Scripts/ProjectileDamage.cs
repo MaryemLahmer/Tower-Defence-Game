@@ -39,14 +39,12 @@ public class ProjectileDamage : MonoBehaviour, IDamageMethod
                 projectile.Seek(enemy);
                 projectile.damage = damage;
                 
-                // reset cooldown
                 delay = 1f / fireRate;
-                return true; // Successfully fired a projectile
+                return true; 
             }
         }
         
-        // reset cooldown even if something failed
         delay = 1f / fireRate;
-        return false; // Failed to fire projectile
+        return false; 
     }
 }
