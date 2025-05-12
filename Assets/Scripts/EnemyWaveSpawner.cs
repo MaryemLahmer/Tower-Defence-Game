@@ -63,22 +63,15 @@ public class EnemyWaveSpawner : MonoBehaviour
         {
             pathCells = new List<Vector2Int>(path);
             pathIsReady = true;
-            Debug.Log($"Path set with {pathCells.Count} cells. Starting at ({pathCells[0].x}, {pathCells[0].y}) and ending at ({pathCells[pathCells.Count-1].x}, {pathCells[pathCells.Count-1].y})");
         }
-        else
-        {
-            Debug.LogError("Invalid path provided to EnemyWaveSpawner!");
-        }
+       
     }
     
     public void StartWaveSpawning()
     {   
-        Debug.Log("StartWaveSpawning called.");
         
-        // Safety check to make sure path is ready before spawning enemies
         if (!pathIsReady)
         {
-            Debug.LogError("Cannot spawn enemies - path not set yet! Enemies will be spawned once path is ready.");
             return;
         }
         
@@ -89,7 +82,6 @@ public class EnemyWaveSpawner : MonoBehaviour
     
     private void OnWaveCompleted(int waveNumber)
     {
-        Debug.Log($"Wave {waveNumber} completed! Increasing difficulty for next wave.");
     }
     
     // Assign path to a spawned enemy
@@ -101,19 +93,15 @@ public class EnemyWaveSpawner : MonoBehaviour
         }
         else if (spawnedEnemy != null)
         {
-            Debug.LogError("Trying to assign path to enemy but path is not ready!");
             
-            // Safety measure: destroy the enemy to prevent game freeze
             Destroy(spawnedEnemy.gameObject);
         }
     }
     
     private IEnumerator SpawnWave()
     {
-        // Safety check - don't spawn if path isn't ready
         if (!pathIsReady)
         {
-            Debug.LogError("Cannot spawn wave - path not set!");
             yield break;
         }
         
@@ -289,42 +277,5 @@ private int CalculateEnemyCount(EnemyWaveData enemyData)
     Debug.LogWarning($"No enemy data found for ID: {enemyID}");
     return null;
 }
-    // Visualize the path in the editor - simplified for runtime-generated paths
-    private void OnDrawGizmos()
-    {
-        if (pathCells != null && pathCells.Count > 1 && pathIsReady)
-        {
-            // Draw path points
-            for (int i = 0; i < pathCells.Count; i++)
-            {
-                // Start point (green)
-                if (i == 0)
-                {
-                    Gizmos.color = Color.green;
-                    Gizmos.DrawSphere(new Vector3(pathCells[i].x, 0.2f, pathCells[i].y), 0.3f);
-                }
-                // End point (red)
-                else if (i == pathCells.Count - 1)
-                {
-                    Gizmos.color = Color.red;
-                    Gizmos.DrawSphere(new Vector3(pathCells[i].x, 0.2f, pathCells[i].y), 0.3f);
-                }
-                // Waypoints (yellow)
-                else
-                {
-                    Gizmos.color = Color.yellow;
-                    Gizmos.DrawSphere(new Vector3(pathCells[i].x, 0.2f, pathCells[i].y), 0.2f);
-                }
-                
-                // Draw path lines
-                if (i < pathCells.Count - 1)
-                {
-                    Gizmos.color = Color.yellow;
-                    Vector3 start = new Vector3(pathCells[i].x, 0.2f, pathCells[i].y);
-                    Vector3 end = new Vector3(pathCells[i+1].x, 0.2f, pathCells[i+1].y);
-                    Gizmos.DrawLine(start, end);
-                }
-            }
-        }
-    }
+    
 }

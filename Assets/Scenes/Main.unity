@@ -1556,6 +1556,8 @@ GameObject:
   - component: {fileID: 693872037}
   - component: {fileID: 693872039}
   - component: {fileID: 693872042}
+  - component: {fileID: 693872043}
+  - component: {fileID: 693872044}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1677,6 +1679,37 @@ MonoBehaviour:
     spawnChance: 1
   baseEnemyCount: 15
   additionalEnemiesPerWave: 10
+  spawnDelayReductionPerWave: 0.05
+  initialSpawnDelay: 1
+  minSpawnDelay: 0.2
+--- !u!114 &693872043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693872036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ff50a929862a94692e8b5faae288e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loopShouldEnd: 0
+--- !u!114 &693872044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693872036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0da55a389cfa0cd4992606816224cac5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyTypes: []
+  baseEnemyCount: 10
+  additionalEnemiesPerWave: 3
   spawnDelayReductionPerWave: 0.05
   initialSpawnDelay: 1
   minSpawnDelay: 0.2
