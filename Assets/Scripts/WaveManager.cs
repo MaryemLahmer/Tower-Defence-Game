@@ -7,9 +7,9 @@ using TMPro;
 public class WaveManager : MonoBehaviour
 {
     [Header("Phase Settings")]
-    [SerializeField] private float placementPhaseDuration = 5f;
-    [SerializeField] private float wavePhaseDuration = 18f;
-    [SerializeField] private float announcementTime = 3f;
+    [SerializeField] private float placementPhaseDuration ;
+    [SerializeField] private float wavePhaseDuration;
+    [SerializeField] private float announcementTime ;
     
     [Header("UI References")]
     [SerializeField] private TextMeshProUGUI announcementText;

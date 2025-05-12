@@ -51,7 +51,6 @@ public class EntitySummoner : MonoBehaviour
 
     public static Enemy SummonEnemy(int enemyID)
     {   
-        Debug.Log($"Summoned enemy {enemyID}");
         Enemy summonedEnemy = null;
         if (enemyobjectPools.ContainsKey(enemyID))
         {
@@ -71,9 +70,7 @@ public class EntitySummoner : MonoBehaviour
                 summonedEnemy.id = enemyID;
                 summonedEnemy.Init();
             }
-        // Add to alive enemies list
         enemiesAlive.Add(summonedEnemy);
-        // Fire event
         OnEnemySpawned?.Invoke(summonedEnemy);
         return summonedEnemy;
         }
