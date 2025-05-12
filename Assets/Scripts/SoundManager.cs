@@ -30,7 +30,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip buttonClickSound;
     [SerializeField] private AudioClip towerPlacedSound;
     [SerializeField] private AudioClip enemyDefeatedSound;
-    
+    [SerializeField] private AudioClip towerFireSound;
+
     // Projectile sounds
     [Header("Projectile Sounds")]
     [SerializeField] private AudioClip arrowImpactSound;
@@ -147,6 +148,7 @@ public class SoundManager : MonoBehaviour
         
         // Add SFX
         if (buttonClickSound != null) soundLibrary["ButtonClick"] = buttonClickSound;
+        if (towerFireSound != null) soundLibrary["TowerFire"] = towerFireSound;
         if (towerPlacedSound != null) soundLibrary["TowerPlaced"] = towerPlacedSound;
         if (enemyDefeatedSound != null) soundLibrary["EnemyDefeated"] = enemyDefeatedSound;
         
@@ -163,17 +165,14 @@ public class SoundManager : MonoBehaviour
     
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Play appropriate music based on scene
         if (scene.name == "Menu")
             PlayMenuMusic();
         else if (scene.name == "Game" || scene.name == "Main")
             PlayGameMusic();
             
-        // Find and disable any other music players that might have been loaded with the scene
         DisableOtherMusicPlayers();
     }
     
-    // Music control methods
     public void PlayMenuMusic()
     {
         PlayMusic(soundLibrary.ContainsKey("MenuMusic") ? soundLibrary["MenuMusic"] : null);
@@ -204,7 +203,10 @@ public class SoundManager : MonoBehaviour
     {
         PlaySoundEffect("ButtonClick");
     }
-    
+    public void PlayTowerFireSound()
+    {
+        PlaySoundEffect("TowerFire");
+    }
     public void PlayTowerPlacedSound()
     {
         PlaySoundEffect("TowerPlaced");

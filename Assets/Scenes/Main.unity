@@ -955,14 +955,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 55
   playerCamera: {fileID: 1741037748}
-  towerPrefabs:
-  - {fileID: 3793147321027664187, guid: 99fdd7b8d7cdd5b4b933816bc447f435, type: 3}
-  - {fileID: 1495742883894667982, guid: 951eb398c50bd604f93b10096021ced5, type: 3}
-  - {fileID: 5931691036288507535, guid: 13845911b5eb9a7459578b79761264a6, type: 3}
-  - {fileID: 514070166564619910, guid: df1a1b1a15fa8274e9dafb930b3ac805, type: 3}
-  towerCosts: 500000006e000000c8000000fa000000
-  validPlacementColor: {r: 0.5, g: 1, b: 0.5, a: 0.7}
-  invalidPlacementColor: {r: 1, g: 0.5, b: 0.5, a: 0.7}
 --- !u!114 &693872042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1021,12 +1013,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0da55a389cfa0cd4992606816224cac5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyTypes: []
-  baseEnemyCount: 10
-  additionalEnemiesPerWave: 3
-  spawnDelayReductionPerWave: 0.05
-  initialSpawnDelay: 1
-  minSpawnDelay: 0.2
+  baseEnemeySpeed: 2
 --- !u!1 &787851554
 GameObject:
   m_ObjectHideFlags: 0
@@ -1860,9 +1847,33 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7148495726831555196, guid: 8594b3cd9c78a5e46be783f689fbb4c9, type: 3}
+      propertyPath: audioMixer
+      value: 
+      objectReference: {fileID: 24100000, guid: eb1c034399f31064a82145c72fd3492d, type: 2}
+    - target: {fileID: 7148495726831555196, guid: 8594b3cd9c78a5e46be783f689fbb4c9, type: 3}
+      propertyPath: normalSnapshot
+      value: 
+      objectReference: {fileID: 24500006, guid: eb1c034399f31064a82145c72fd3492d, type: 2}
+    - target: {fileID: 7148495726831555196, guid: 8594b3cd9c78a5e46be783f689fbb4c9, type: 3}
+      propertyPath: duckingSnapshot
+      value: 
+      objectReference: {fileID: 2514272355674930248, guid: eb1c034399f31064a82145c72fd3492d, type: 2}
+    - target: {fileID: 7148495726831555196, guid: 8594b3cd9c78a5e46be783f689fbb4c9, type: 3}
+      propertyPath: arrowImpactSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 2e1678d82e9b69243849735af77e0bd4, type: 3}
+    - target: {fileID: 7148495726831555196, guid: 8594b3cd9c78a5e46be783f689fbb4c9, type: 3}
       propertyPath: towerPlacedSound
       value: 
       objectReference: {fileID: 8300000, guid: e70e0d59fe6e62a46b49f91e870d50ef, type: 3}
+    - target: {fileID: 7148495726831555196, guid: 8594b3cd9c78a5e46be783f689fbb4c9, type: 3}
+      propertyPath: cannonImpactSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 316e7c07e21d5324cb9a9c0893ef6905, type: 3}
+    - target: {fileID: 7148495726831555196, guid: 8594b3cd9c78a5e46be783f689fbb4c9, type: 3}
+      propertyPath: turretImpactSound
+      value: 
+      objectReference: {fileID: 8300000, guid: f39dfa71482d85c4b89c296c6d92cedc, type: 3}
     - target: {fileID: 7148495726831555196, guid: 8594b3cd9c78a5e46be783f689fbb4c9, type: 3}
       propertyPath: enemyDefeatedSound
       value: 

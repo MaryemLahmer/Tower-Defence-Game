@@ -80,7 +80,7 @@ public class TowerBehavior : MonoBehaviour
                 // Play firing sound
                 if (SoundManager.Instance != null)
                 {
-                    SoundManager.Instance.PlayTowerFireSound(towerSoundTypeIndex, transform.position);
+                    SoundManager.Instance.PlayTowerFireSound();
                     lastSoundTime = Time.time;
                 }
             }
@@ -94,7 +94,7 @@ public class TowerBehavior : MonoBehaviour
     {
         if (SoundManager.Instance != null)
         {
-            SoundManager.Instance.PlayTowerFireSound(towerSoundTypeIndex, transform.position);
+            SoundManager.Instance.PlayTowerFireSound();
             lastSoundTime = Time.time;
         }
     }
