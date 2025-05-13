@@ -5,15 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
-    public CanvasGroup OptionPanel;
+    public CanvasGroup OptionPanel; 
     private SoundManager soundManager;
 
     private void Start()
     {
-        // Get reference to sound manager
         soundManager = SoundManager.Instance;
         
-        // Make sure options panel starts hidden
         if (OptionPanel != null)
         {
             OptionPanel.alpha = 0;

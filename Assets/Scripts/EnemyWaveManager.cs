@@ -12,8 +12,6 @@ public class EnemyWaveManager : MonoBehaviour
     [SerializeField] private EnemyWaveData[] enemyTypes;
     
     [Header("Wave Settings")]
-    [SerializeField] private int baseEnemyCount = 10;
-    [SerializeField] private int additionalEnemiesPerWave = 3;
     [SerializeField] private float spawnDelayReductionPerWave = 0.05f;
     
     [Header("Spawn Settings")]

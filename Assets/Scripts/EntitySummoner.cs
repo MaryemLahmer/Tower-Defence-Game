@@ -28,13 +28,11 @@ public class EntitySummoner : MonoBehaviour
                 enemyPrefabs.Add(enemy.enemyId, enemy.enemeyPrefab);
                 enemyobjectPools.Add(enemy.enemyId, new Queue<Enemy>());
                 enemyDataCache.Add(enemy.enemyId, enemy);
-                Debug.Log($"Registered enemy ID {enemy.enemyId}");
 
             }
 
             isInialized = true;
         }
-        Debug.Log("EntitySummoner initialized.");
 
     }
 
