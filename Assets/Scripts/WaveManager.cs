@@ -5,7 +5,13 @@ using UnityEngine.Events;
 using TMPro;
 
 public class WaveManager : MonoBehaviour
-{
+{   
+    [Header("Game End Conditions")]
+    [SerializeField] private int finalWave = 5;
+    [SerializeField] private int gameOverMultiplier = -10; 
+    [SerializeField] private GameObject victoryPanel; 
+    [SerializeField] private GameObject gameOverPanel; 
+
     [Header("Phase Settings")]
     [SerializeField] private float placementPhaseDuration ;
     [SerializeField] private float wavePhaseDuration;
@@ -20,6 +26,10 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private int currentWave = 0;
     [SerializeField] private bool isPlacementPhase = true;
     [SerializeField] private float currentPhaseTimeRemaining;
+
+    [Header("Game Balance")]
+    [SerializeField] private int maxAllowedLeaks = 10;
+    private int leakCount = 0;
     
     // References
     private TowerDefenseUI uiManager;
@@ -44,6 +54,7 @@ public class WaveManager : MonoBehaviour
         
         // Start the game
         StartCoroutine(StartGameWithDelay(2f));
+        Enemy.OnLeakStatic += HandleEnemyLeak;
     }
     
     private IEnumerator StartGameWithDelay(float delay)
@@ -191,7 +202,11 @@ public class WaveManager : MonoBehaviour
         
         // Notify listeners
         onWaveCompleted.Invoke(currentWave - 1);
-        
+        if (currentWave > finalWave)
+    {
+        GameWon();
+        return;
+    }
         // Start next placement phase
         StartPlacementPhase();
     }
@@ -244,4 +259,97 @@ public class WaveManager : MonoBehaviour
     {
         currentPhaseTimeRemaining = 0.1f;
     }
+    // Game ending logic
+private void CheckGameEndConditions()
+{
+    // Check if this was the final wave
+    if (currentWave > finalWave)
+    {
+        Debug.Log("Final wave completed! Victory!");
+        GameWon();
+    }
+    
+    // Enemy leaks are handled by a listener to Enemy.OnLeak event
+}
+
+public void GameWon()
+{
+    // Stop game
+    Time.timeScale = 0f;
+    
+    // Show victory panel
+    if (victoryPanel != null)
+    {
+        victoryPanel.SetActive(true);
+        ShowAnnouncement("VICTORY!\nYOU'VE COMPLETED ALL WAVES!");
+    }
+    else
+    {
+        Debug.Log("VICTORY! You completed all 5 waves!");
+    }
+}
+
+public void GameOver()
+{
+    // Stop game
+    Time.timeScale = 0f;
+    
+    // Show game over panel
+    if (gameOverPanel != null)
+    {
+        gameOverPanel.SetActive(true);
+        ShowAnnouncement("GAME OVER!\nTOO MANY ENEMIES LEAKED!");
+    }
+    else
+    {
+        Debug.Log("GAME OVER! Too many enemies leaked!");
+    }
+}
+
+// UI Button Methods
+public void RestartGame()
+{
+    // Reset time scale
+    Time.timeScale = 1f;
+    
+    // Reload current scene
+    UnityEngine.SceneManagement.SceneManager.LoadScene(
+        UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+}
+
+public void ReturnToMainMenu()
+{
+    // Reset time scale
+    Time.timeScale = 1f;
+    
+    // Load main menu scene - update "MainMenu" to your actual scene name
+    UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
+}
+private void HandleEnemyLeak(Enemy enemy)
+{
+    leakCount++;
+    Debug.Log($"Enemy leaked! Total leaks: {leakCount}/{maxAllowedLeaks}");
+    
+    // Show announcement for near game over
+    if (leakCount == maxAllowedLeaks - 3)
+    {
+        ShowAnnouncement("WARNING!\nONLY 3 MORE LEAKS UNTIL GAME OVER!");
+    }
+    else if (leakCount == maxAllowedLeaks - 1)
+    {
+        ShowAnnouncement("CRITICAL WARNING!\nONE MORE LEAK UNTIL GAME OVER!");
+    }
+    
+    // Check for game over
+    if (leakCount >= maxAllowedLeaks)
+    {
+        GameOver();
+    }
+}
+
+private void OnDestroy()
+{
+    // Remove event listener to prevent memory leaks
+    Enemy.OnLeakStatic -= HandleEnemyLeak;
+}
 }

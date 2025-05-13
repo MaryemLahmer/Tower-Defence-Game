@@ -103,4 +103,13 @@ public class EntitySummoner : MonoBehaviour
         enemyToRemove.gameObject.SetActive(false);
         enemiesAlive.Remove(enemyToRemove);
     }
+    // Add to your EntitySummoner class
+public static void ClearAllEntities()
+{
+    // Clear all lists/collections of entities
+    if (enemiesAlive != null)
+        enemiesAlive.Clear();
+        
+    // Reset any other static variables here
+}
 }

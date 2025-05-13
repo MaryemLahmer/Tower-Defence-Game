@@ -26,7 +26,8 @@ public class Enemy : MonoBehaviour
     [Header("Visual Feedback")]
     [SerializeField] private GameObject healthBarObject;
     [SerializeField] private Transform healthBarFill;
-    // Add this method to your Enemy class
+    
+    public static event System.Action<Enemy> OnLeakStatic;
 public void InitWithData(EnemySummonData data)
 {
     if (data == null)
@@ -185,6 +186,9 @@ private void MoveAlongPath()
             }
            
             OnLeak.Invoke(this);
+            
+            OnLeakStatic?.Invoke(this);
+            
             EntitySummoner.RemoveEnemey(this);
         }
     }

@@ -39,6 +39,7 @@ public class EnemyWaveSpawner : MonoBehaviour
     
     private void Start()
     {
+        
         // Ensure EntitySummoner is initialized
         if (!EntitySummoner.isInialized)
         {
