@@ -84,10 +84,10 @@ public class SoundManager : MonoBehaviour
         }
 
         _instance = this;
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
         // Find and disable any other music players in the scene
-        DisableOtherMusicPlayers();
+        //DisableOtherMusicPlayers();
 
         // Create audio sources if not assigned
         if (musicSource == null)
@@ -145,20 +145,16 @@ public class SoundManager : MonoBehaviour
         AudioSource[] allSources = FindObjectsOfType<AudioSource>();
         foreach (AudioSource source in allSources)
         {
-            // Skip our own source
             if (source == musicSource || source == sfxSource)
                 continue;
 
-            // If it's playing on awake or already playing, it might be our problem source
             if (source.playOnAwake || source.isPlaying)
             {
-                // disable it and log a message
                 Debug.LogWarning("Found another AudioSource playing on: " + source.gameObject.name +
                                  ". Disabling it as it might conflict with SoundManager.");
                 source.playOnAwake = false;
                 source.Stop();
 
-                // Ensure it uses the audio mixer if it's playing music
                 if (source.clip != null && source.loop)
                 {
                     AudioMixerGroup[] musicGroups = audioMixer.FindMatchingGroups("Music");
@@ -199,7 +195,7 @@ public class SoundManager : MonoBehaviour
         else if (scene.name == "Game" || scene.name == "Main")
             PlayGameMusic();
 
-        DisableOtherMusicPlayers();
+       // DisableOtherMusicPlayers();
     }
 
     public void PlayMenuMusic()
@@ -512,7 +508,7 @@ public class SoundManager : MonoBehaviour
     private void InitializeDefaultSettings()
     {
         // Find and disable other music players
-        DisableOtherMusicPlayers();
+       // DisableOtherMusicPlayers();
 
         // Create audio sources if not assigned
         if (musicSource == null)
